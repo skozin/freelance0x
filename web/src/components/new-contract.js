@@ -44,7 +44,7 @@ const NewContractBtn = styled.a`
 
 const FormTitle = styled.h2`
   color: #242737;
-  font-size: 28px;
+  font-size: 36px;
   margin-bottom: 28px;
   align-self: center;
 `
@@ -52,9 +52,15 @@ const FormTitle = styled.h2`
 const FormDescription = styled.div`
   text-align: center;
   vertical-align: middle;
-  margin-bottom: 6px;
+  margin-bottom: 32px;
   font-size: 16px;
   color: #242737;
+`
+
+const Paragraph = styled.p`
+  &:first-child {
+    margin-bottom: 5px;
+  }
 `
 
 const InputsContainer = styled.div`
@@ -94,7 +100,9 @@ const PrepaymentCurrentValue = Input.extend`
   text-align: center;
   color: #9B9B9B;
 `
-const Prepayment = Input.extend``
+const Prepayment = Input.extend`
+  cursor: pointer;
+`
 
 const PaymentOverlay = styled.div`
   height: 5px;
@@ -104,6 +112,7 @@ const PaymentOverlay = styled.div`
   top: 30px;
   left: 182px;
   border-radius: 2px;
+  cursor: pointer;
 `
 
 export class NewContract extends React.Component {
@@ -126,8 +135,8 @@ export class NewContract extends React.Component {
         <NewContractForm>
           <FormTitle>Contract Form</FormTitle>
           <FormDescription>
-            <p>Select your prefered payment methodand enter your details.</p>
-            <p>We use this info for account verification, your credit card won't be charged now.</p>
+            <Paragraph>Select your prefered payment methodand enter your details.</Paragraph>
+            <Paragraph>We use this info for account verification, your credit card won't be charged now.</Paragraph>
           </FormDescription>
           <ContractorAddress disabled innerRef={node => this.contractorAddressInput = node} />
           <InputsContainer>
