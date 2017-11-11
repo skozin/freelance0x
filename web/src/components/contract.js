@@ -5,18 +5,19 @@ import { Link } from 'react-router-dom'
 import connect from '~/utils/connect'
 import sel from '~/selectors'
 
-const NewContractScreen = styled.div`
+import background from '../../assets/background.png'
+
+const Contract = styled.div`
   display: flex;
   justify-content: center;
   padding: 0 40px;
+  background: url(${background}) no-repeat center / cover;
 `
 
 const NewContractForm = styled.form`
-
   font-family: 'Proxima Nova';
   display: flex;
   flex-direction: column;
-  justify-content: center;
   width: 700px;
   height: 600px;
   margin: 100px 0;
@@ -25,7 +26,6 @@ const NewContractForm = styled.form`
   background-color: white;
   border-radius: 5px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-
 `
 
 const NewContractBtn = styled.a`
@@ -44,11 +44,46 @@ const NewContractBtn = styled.a`
   border-radius: 5px;
 `
 
-const FormTitle = styled.h2`
+const Header = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  width: 100%;
+  font-family: 'Muller';
+  font-weight: 500;
   color: #242737;
   font-size: 28px;
-  margin-bottom: 28px;
   align-self: left;
+`
+
+const StatusBar = styled.div`
+  font-family: 'Proxima Nova';
+  font-size: 16px;
+
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+`
+
+const Circle = styled.div`
+  background: #8AE7B0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+`
+
+const Separator = styled.div`
+    content: '';
+    display: block;
+    width: 70px;
+    height: 2px;
+    border-radius: 3px;
+    background: #5E69D7;
+    margin-top: 24px;
+    margin-bottom: 32px;
+
+    letter-spacing: 0.76px; 
 `
 
 const FormDescription = styled.div`
@@ -101,10 +136,16 @@ export class NewContract extends React.Component {
 
   render() {
     return (
-      <NewContractScreen>
+      <Contract>
 
         <NewContractForm>
-          <FormTitle>Contract Form</FormTitle>
+          <Header>Contract Form
+            <StatusBar>
+              <Circle />
+              ACTIVE
+            </StatusBar>
+          </Header>
+          <Separator/>
           <FormDescription>
             <p>Select your prefered payment methodand enter your details.</p>
             <p>We use this info for account verification, your credit card won't be charged now.</p>
@@ -126,7 +167,7 @@ export class NewContract extends React.Component {
           <NewContractBtn onClick={this.createProject}>Create Contract</NewContractBtn>
         </NewContractForm>
 
-      </NewContractScreen>
+      </Contract>
     )
   }
 

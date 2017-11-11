@@ -7,9 +7,11 @@ import sel from '~/selectors'
 import SplashScreen from './splash-screen'
 
 const LayoutContainer = styled.div`
+  background: url('./assets/background.png') no-repeat center / contain;
   font-face: sans-serif;
   font-size: 16px;
-`
+
+` 
 
 export class Layout extends React.Component {
 
