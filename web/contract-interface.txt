@@ -1,0 +1,46 @@
+
+enum Role {
+  Stranger,
+  Contractor,
+  Client
+}
+
+enum State {
+  Created,
+  Active,
+  Approved,
+  Cancelled
+}
+
+constructor()
+  - string name
+  - address clientAddress
+  - uint hourlyRate
+  - uint timeCapMinutes
+  - uint prepayFractionThousands
+
+executionDate() view returns (uint)
+endDate() view returns (uint)
+
+state() view returns (State)
+
+minutesReported() view returns (uint)
+
+getRole() view returns (Role)
+  - address addr
+
+start() clientOnly payable
+
+setBillableTime() contractorOnly
+  - uint timeMinutes
+  - string comment
+
+approve() clientOnly
+
+cancel() clientOnly
+
+withdraw() returns (uint)
+
+leaveFeedback()
+  - bool positive
+  - string comment

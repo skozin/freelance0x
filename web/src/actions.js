@@ -1,4 +1,8 @@
 
+//
+// Connection-related actions
+//
+
 failedToConnect.type = 'FAILED_TO_CONNECT'
 
 export function failedToConnect(errorMessage) {
@@ -17,20 +21,55 @@ export function connected(address) {
   }
 }
 
-createProject.type = 'CREATE_PROJECT'
+//
+// Contract-related actions
+//
 
-export function createProject(name) {
+setContractsList.type = 'SET_CONTRACTS_LIST'
+
+export function setContractsList(contractsById) {
   return {
-    type: createProject.type,
-    name,
+    type: setContractsList.type,
+    contractsById,
   }
 }
 
-projectCreated.type = 'PROJECT_CREATED'
+updateContract.type = 'UPDATE_CONTRACT'
 
-export function projectCreated(project) {
+export function updateContract(contract, ephemeralAddress) {
   return {
-    type: projectCreated.type,
-    project,
+    type: updateContract.type,
+    contract,
+    ephemeralAddress,
+  }
+}
+
+createContract.type = 'CREATE_CONTRACT'
+
+export function createContract(name) {
+  const ephemeralAddress = 'new-' + Date.now() + '-' + Math.floor(100000 * Math.random())
+  return {
+    type: createContract.type,
+    name,
+    ephemeralAddress,
+  }
+}
+
+contractCreationFailed.type = 'CONTRACT_CREATION_FAILED'
+
+export function contractCreationFailed(ephemeralAddress, errorMessage) {
+  return {
+    type: contractCreationFailed.type,
+    ephemeralAddress,
+    errorMessage,
+  }
+}
+
+startContract.type = 'START_CONTRACT'
+
+export function startContract(address) {
+  return {
+    type: startContract.type,
+    address,
   }
 }

@@ -1,19 +1,24 @@
 import React from 'react'
 
-import {BrowserRouter} from 'react-router-dom'
+import {ConnectedRouter} from 'react-router-redux'
 import {Route} from 'react-router-dom'
 
+import history from './history'
+
 import Layout from './components/layout'
-import WelcomeScreen from './components/welcome-screen'
+
+import ContractsListScreen from './components/contracts-list-screen'
 import NewContract from './components/new-contract'
+import ContractDetailsScreen from './components/contract-details-screen'
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <ConnectedRouter history={history}>
       <Layout>
-        <Route exact path='/' component={WelcomeScreen} />
+        <Route exact path='/' component={ContractsListScreen} />
         <Route exact path='/new' component={NewContract} />
+        <Route path='/contract/:address' component={ContractDetailsScreen} />
       </Layout>
-    </BrowserRouter>
+    </ConnectedRouter>
   )
 }

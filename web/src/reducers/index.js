@@ -1,34 +1,29 @@
 import {fromJS} from 'immutable'
 import * as Actions from '~/actions'
 
+import {routerReducer} from 'react-router-redux'
+
 import connectionReducer from './connection'
+import contractsReducer from './contracts'
 
 
 const INITIAL_STATE = fromJS({
   connection: connectionReducer.INITIAL_STATE,
-  isCreatingProject: false,
-  project: null,
+  contracts: contractsReducer.INITIAL_STATE,
 })
 
 
 export default function rootReducer(state = INITIAL_STATE, action) {
   console.debug(`[action]`, action)
 
-  let wrapReducer = (reducer, ...args) => state => reducer(state, action, ...args)
+  const wrapReducer = (reducer, ...args) => state => reducer(state, action, ...args)
+  const newRouterState = routerReducer(state, action)
 
   state = state.update('connection', wrapReducer(connectionReducer))
+  state = state.update('contracts', wrapReducer(contractsReducer))
 
-  switch (action.type) {
-    case Actions.createProject.type: {
-      return state.set('isCreatingProject', true)
-    }
-    case Actions.projectCreated.type: {
-      return state.merge({
-        isCreatingProject: false,
-        project: action.project,
-      })
-    }
-  }
+  state = state.merge({router: newRouterState})
+  state.router = newRouterState
 
   return state
 }

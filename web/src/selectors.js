@@ -9,8 +9,7 @@ let sel = makeSelectors({
   isConnecting: ['connection', 'isConnecting'],
   isConnected: ['connection', 'isConnected'],
   account: ['connection', 'account'],
-  isCreatingProject: 'isCreatingProject',
-  project: 'project',
+  contracts: 'contracts',
 })
 
 
@@ -24,8 +23,8 @@ sel.needsToLogIn = (state) => {
 }
 
 
-sel.hasProject = (state) => {
-  return !!sel.project(state)
+sel.contractWithAddress = (state, address) => {
+  return sel.contracts(state).get(address)
 }
 
 

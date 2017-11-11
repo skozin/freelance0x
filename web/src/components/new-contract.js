@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 
 import connect from '~/utils/connect'
-import sel from '~/selectors'
 
 
 const NewContractScreen = styled.div`
@@ -21,25 +20,17 @@ const ProjectNameInput = styled.input`
 
 export class NewContract extends React.Component {
 
-  static mapStateToProps(state) {
-    return {
-      isCreatingProject: sel.isCreatingProject(state),
-      hasProject: sel.hasProject(state),
-    }
-  }
-
   render() {
     return (
       <NewContractScreen>
-        <NewContractBtn onClick={this.createProject}>Create</NewContractBtn>
+        <NewContractBtn onClick={this.createContract}>Create</NewContractBtn>
         <ProjectNameInput innerRef={node => this.nameInput = node} />
-        {`isCreating: ${this.props.isCreatingProject}, hasProject: ${this.props.hasProject}`}
       </NewContractScreen>
     )
   }
 
-  createProject = () => {
-    this.props.actions.createProject(this.nameInput.value)
+  createContract = () => {
+    this.props.actions.createContract(this.nameInput.value)
   }
 
 }
