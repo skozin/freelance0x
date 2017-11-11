@@ -90,6 +90,7 @@ const PrepaymentCurrentValue = Input.extend`
   width: 150px;
   margin-right: 20px;
   text-align: center;
+  color: #9B9B9B;
 `
 const Prepayment = Input.extend``
 
