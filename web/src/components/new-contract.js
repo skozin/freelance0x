@@ -15,7 +15,6 @@ const NewContractForm = styled.form`
   font-family: 'Proxima Nova';
   display: flex;
   flex-direction: column;
-  justify-content: center;
   width: 700px;
   height: 600px;
   margin: 100px 0;
@@ -23,7 +22,7 @@ const NewContractForm = styled.form`
   box-sizing: border-box;
   background-color: white;
   border-radius: 5px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
 `
 
 const NewContractBtn = styled.a`
@@ -31,6 +30,7 @@ const NewContractBtn = styled.a`
   width: 100%;
   align-self: flex-end;
   padding: 16px;
+  margin-top: 20px;
   border: 1px solid;
   border-radius: 2px;
   cursor: pointer;
@@ -53,13 +53,14 @@ const FormDescription = styled.div`
   text-align: center;
   vertical-align: middle;
   margin-bottom: 6px;
-  font-size: 18px;
+  font-size: 16px;
   color: #242737;
 `
 
 const InputsContainer = styled.div`
   display: flex;
   jusstify-content: space-between;
+  position: relative;
 `
 
 const Input = styled.input`
@@ -95,6 +96,16 @@ const PrepaymentCurrentValue = Input.extend`
 `
 const Prepayment = Input.extend``
 
+const PaymentOverlay = styled.div`
+  height: 5px;
+  background-color: #5E69D7;
+  width: 446px;
+  position: absolute;
+  top: 30px;
+  left: 182px;
+  border-radius: 2px;
+`
+
 export class NewContract extends React.Component {
 
   static mapStateToProps(state) {
@@ -102,6 +113,10 @@ export class NewContract extends React.Component {
       isCreatingProject: sel.isCreatingProject(state),
       hasProject: sel.hasProject(state),
     }
+  }
+
+  componentDidMount = () => {
+    this.updateRangeValue()
   }
 
   render() {
@@ -126,6 +141,7 @@ export class NewContract extends React.Component {
           <InputsContainer>
             <PrepaymentCurrentValue id='paymentVal' disabled/>
             <Prepayment type='range' innerRef={node => this.prepaymentInput = node} onChange={this.updateRangeValue} />
+            <PaymentOverlay id='paymentOverlay' />
           </InputsContainer>
 
           <NewContractBtn onClick={this.createProject}>Create Contract</NewContractBtn>
@@ -150,6 +166,9 @@ export class NewContract extends React.Component {
   updateRangeValue = () => {
     const val = this.prepaymentInput.value;
     document.getElementById('paymentVal').value = val + '% prepayment';
+    const paymentOverlay = document.getElementById('paymentOverlay');
+    const newWidth = 446 * val / 100;
+    paymentOverlay.style.width = newWidth + 'px';
   }
 
 }
