@@ -38,12 +38,15 @@ export default class ProjectContract {
 
   static State = State
 
-  static async deploy(name) {
+  static async deploy(name, clientAddress, hourlyRate, timeCapMinutes, prepayFractionThousands) {
     const {web3, accounts, Project} = await apiPromise
-    const instance = await Project.new(name, {
-      from: accounts[0],
-      gas: 1000000,
-    })
+    const instance = await Project.new(
+      name, clientAddress, hourlyRate, timeCapMinutes, prepayFractionThousands,
+      {
+        from: accounts[0],
+        gas: 1000000,
+      }
+    )
     const contract = new ProjectContract(web3, accounts[0], instance)
     await contract.initialize()
     return contract

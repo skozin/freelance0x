@@ -33,7 +33,13 @@ function* $handleCreateContract(action) {
   yield* $dispatch(push(`/contract/${action.ephemeralAddress}`))
   let contract
   try {
-    contract = yield call(ProjectContract.deploy, action.name)
+    contract = yield call(ProjectContract.deploy,
+      action.name,
+      action.clientAddress,
+      action.hourlyRate,
+      action.timeCapMinutes,
+      action.prepayFractionThousands,
+    )
   } catch (err) {
     yield* $dispatch(Actions.contractCreationFailed(action.ephemeralAddress, err.message))
     setTimeout(() => {throw err}, 0)

@@ -46,11 +46,17 @@ export function updateContract(contract, ephemeralAddress) {
 
 createContract.type = 'CREATE_CONTRACT'
 
-export function createContract(name) {
+export function createContract(
+  name, clientAddress, hourlyRate, timeCapMinutes, prepayFractionThousands
+) {
   const ephemeralAddress = 'new-' + Date.now() + '-' + Math.floor(100000 * Math.random())
   return {
     type: createContract.type,
     name,
+    clientAddress,
+    hourlyRate,
+    timeCapMinutes,
+    prepayFractionThousands,
     ephemeralAddress,
   }
 }
