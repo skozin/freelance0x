@@ -45,9 +45,10 @@
     "react-transition-group": "^1.1.1",
     "redux": "^3.6.0",
     "redux-saga": "^0.16.0",
+    "reselect": "^3.0.1",
     "styled-components": "2.2.0",
     "truffle-contract": "^3.0.1",
-    "web3": "^1.0.0-beta.23",
+    "web3": "^0.20.2",
     "whatwg-fetch": "^2.0.3"
   },
   "scripts": {
