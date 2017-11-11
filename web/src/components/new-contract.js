@@ -23,7 +23,6 @@ const NewContractForm = styled.form`
   background-color: white;
   border-radius: 5px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-
 `
 
 const NewContractBtn = styled.a`
@@ -54,6 +53,7 @@ const FormDescription = styled.div`
   vertical-align: middle;
   margin-bottom: 6px;
   font-size: 18px;
+  color: #242737;
 `
 
 const InputsContainer = styled.div`
@@ -70,6 +70,11 @@ const Input = styled.input`
   font-size: 14px;
   border-radius: 5px;
   border: 1px solid #cccccc;
+  color: #242737;
+  &:focus {
+    outline: none;
+    border-color: #5E69D7;
+  }
 `
 
 const ContractorAddress = Input.extend``
