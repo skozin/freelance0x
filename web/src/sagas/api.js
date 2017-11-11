@@ -18,7 +18,7 @@ export default function* $apiSaga() {
 function* $setAccount() {
   try {
     const address = yield call(getAccount)
-    yield delay(2000)
+    yield delay(1)
     yield* $dispatch(Actions.connected(address || null))
   } catch (err) {
     console.error(`Cannot get account: ${err.message}`)
