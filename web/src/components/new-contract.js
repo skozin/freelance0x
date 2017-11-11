@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 
 import connect from '~/utils/connect'
+import sel from '~/selectors'
 
 const NewContractScreen = styled.div`
   display: flex;
@@ -58,14 +59,15 @@ export class NewContract extends React.Component {
 
   static mapStateToProps(state) {
     return {
-      isCreatingProject: state.get('isCreatingProject'),
-      hasProject: !!state.get('project'),
+      isCreatingProject: sel.isCreatingProject(state),
+      hasProject: sel.hasProject(state),
     }
   }
 
   render() {
     return (
       <NewContractScreen>
+
         <NewContractForm>
           <ContractorAddressLabel>{ 'Contractor Address' }</ContractorAddressLabel>
           <ContractorAddress disabled innerRef={node => this.contractorAddressInput = node} />
