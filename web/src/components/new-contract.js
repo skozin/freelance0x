@@ -46,6 +46,7 @@ const ClientAddress = Input.extend``
 const ContractName = Input.extend``
 const HourlyRate = Input.extend``
 const HoursHardCap = Input.extend``
+const PrepaymentCurrentValue = Input.extend``
 const Prepayment = Input.extend``
 
 const ContractorAddressLabel = Label.extend``
@@ -80,7 +81,8 @@ export class NewContract extends React.Component {
           <HoursHardCapLabel>{ 'Hours Hard Cap' }</HoursHardCapLabel>
           <HoursHardCap innerRef={node => this.hoursHardCapInput = node} />
           <PrepaymentLabel>{ 'Prepayment' }</PrepaymentLabel>
-          <Prepayment type='range' innerRef={node => this.prepaymentInput = node} />
+          <PrepaymentCurrentValue id='paymentVal' disabled/>
+          <Prepayment type='range' innerRef={node => this.prepaymentInput = node} onChange={this.updateRangeValue} />
           
           <NewContractBtn onClick={this.createProject}>Create</NewContractBtn>
         </NewContractForm>
@@ -90,10 +92,22 @@ export class NewContract extends React.Component {
   }
 
   createProject = () => {
-    console.log(this.clientAddressInput.value)
+    const requestObj = {
+      contractorAddress: this.contractorAddressInput.value,
+      clientAddress: this.clientAddressInput.value,
+      contractName: this.contractNameInput.value,
+      hourlyRate: this.hourlyRateInput.value,
+      hoursHardCap: this.hoursHardCapInput.value,
+      prepayment: this.prepaymentInput.value,
+    };
+    console.log(requestObj)
+  }
+
+  updateRangeValue = () => {
+    const val = this.prepaymentInput.value;
+    document.getElementById('paymentVal').value = val;
   }
 
 }
-
 
 export default connect(NewContract)
