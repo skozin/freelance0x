@@ -37,7 +37,7 @@ const Input = styled.input`
 const Label = styled.label`
   display: block;
   margin: 5px 0;
-  font-size: 12px;
+  font-size: 16px;
 `
 
 const ContractorAddress = Input.extend``
@@ -68,17 +68,17 @@ export class NewContract extends React.Component {
       <NewContractScreen>
         <NewContractForm>
           <ContractorAddressLabel>{ 'Contractor Address' }</ContractorAddressLabel>
-          <ContractorAddress disabled ref={node => this.contractorAddressInput = node} />
+          <ContractorAddress disabled innerRef={node => this.contractorAddressInput = node} />
           <ClientAddressLabel>{ 'Client Address' }</ClientAddressLabel>
-          <ClientAddress ref={node => this.clientAddressInput = node} />
+          <ClientAddress innerRef={node => this.clientAddressInput = node} />
           <ContractNameLabel>{ 'Contract Name' }</ContractNameLabel>
-          <ContractName ref={node => this.contractNameInput = node} />
+          <ContractName innerRef={node => this.contractNameInput = node} />
           <HourlyRateLabel>{ 'Hourly Rate' }</HourlyRateLabel>
-          <HourlyRate ref={node => this.hourlyRateInput = node} />
+          <HourlyRate innerRef={node => this.hourlyRateInput = node} />
           <HoursHardCapLabel>{ 'Hours Hard Cap' }</HoursHardCapLabel>
-          <HoursHardCap ref={node => this.hoursHardCapInput = node} />
+          <HoursHardCap innerRef={node => this.hoursHardCapInput = node} />
           <PrepaymentLabel>{ 'Prepayment' }</PrepaymentLabel>
-          <Prepayment type='range' ref={node => this.prepaymentInput = node} />
+          <Prepayment type='range' innerRef={node => this.prepaymentInput = node} />
           
           <NewContractBtn onClick={this.createProject}>Create</NewContractBtn>
         </NewContractForm>
@@ -88,7 +88,7 @@ export class NewContract extends React.Component {
   }
 
   createProject = () => {
-    this.props.actions.createProject(this.nameInput.value)
+    console.log(this.clientAddressInput.value)
   }
 
 }
