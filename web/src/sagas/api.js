@@ -45,10 +45,16 @@ function* $handleCreateContract(action) {
 }
 
 
-function* $handleStartContract() {
+function* $handleStartContract(action) {
   const contract = contractsByAddress[action.address]
   if (!contract) {
     console.error(`Contract with address ${action.address} is not found in list`)
+    return
+  }
+  try {
+    yield call(() => contract.start())
+  } catch (err) {
+    console.error(`Failed to start contract ${action.address}: ${err.message}`)
     return
   }
   yield* $dispatchUpdateContract(contract)

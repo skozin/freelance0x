@@ -39,7 +39,6 @@ export default class ProjectContract {
   static State = State
 
   static async deploy(name) {
-    console.log(``)
     const {web3, accounts, Project} = await apiPromise
     const instance = await Project.new(name, {
       from: accounts[0],
@@ -119,7 +118,7 @@ export default class ProjectContract {
   }
 
   async start() {
-    await assertTxSucceeds(this.instance.setValue(42, {
+    await assertTxSucceeds(this.instance.start({
       from: this.account,
       gas: 100000,
     }))
