@@ -12,6 +12,7 @@ const NewContractScreen = styled.div`
 `
 
 const NewContractForm = styled.form`
+  font-family: 'Proxima Nova';
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -32,7 +33,7 @@ const NewContractBtn = styled.a`
   align-self: flex-end;
   padding: 16px;
   border: 1px solid;
-  border-radius: 2px; 
+  border-radius: 2px;
   cursor: pointer;
   box-sizing: border-box;
   text-align: center;
