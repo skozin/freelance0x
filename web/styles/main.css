@@ -1,0 +1,47 @@
+body {
+	background-color: #88A7DB;
+}
+
+::-webkit-input-placeholder {
+	color: #cccccc;
+}
+::-moz-placeholder {
+  color: #cccccc;
+}
+:-ms-input-placeholder {
+  color: #cccccc;
+}
+:-moz-placeholder {
+  color: #cccccc;
+}
+
+input[type=range]{
+    -webkit-appearance: none;
+    border: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 300px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #5E69D7;
+    margin-top: -4px;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}
