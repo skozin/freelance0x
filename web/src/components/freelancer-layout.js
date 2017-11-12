@@ -34,7 +34,7 @@ const Field = styled.div`
   width: 700px;
   height: 600px;
   margin: 100px 0;
-  padding: 60px 30px;
+  padding: ${props => props.nopadding ? '0 0' : '60px 30px'};
   box-sizing: border-box;
   background-color: white;
   border-radius: 5px;
@@ -50,7 +50,7 @@ export class ContractLayout extends React.Component {
     return (
       <Contract>
         <Logo to='/' />
-        <Field>
+        <Field nopadding={this.props.nopadding}>
           {children}
         </Field>
       </Contract>

@@ -9,6 +9,7 @@ import plus_circle from '../../assets/plus_circle.svg'
 import empty_list from '../../assets/empty_list.svg'
 
 import ContractLayout from './freelancer-layout'
+import ContractItem from './contract-item'
 
 const Header = styled.div`
 	display: flex;
@@ -29,14 +30,30 @@ const NewContract = styled.a`
 	}
 `
 
+const ItemWrapper = styled.div`
+	display: flex;
+	flex-flow: column nowrap;
+`
+
 export class ContractList extends React.Component {
 	render() {
 		return (
-			<ContractLayout>
+			<ContractLayout nopadding>
 				<Header>
 					<FormTitle>Contract List</FormTitle>
 					<NewContract href='/new'>New Contract</NewContract>
 				</Header>
+
+				<ItemWrapper>
+					<ContractItem />
+					<ContractItem />
+					<ContractItem />
+					<ContractItem />
+					<ContractItem />
+					<ContractItem />
+					<ContractItem />
+					<ContractItem />
+				</ItemWrapper>
 			</ContractLayout>	
 		)
 	}

@@ -36,7 +36,7 @@ const Circle = styled.div`
       case 0:
         return '#FFE53A'
       default:
-        return '#5E69D7'
+        return '#8AA0E7'
       }
     }};
   width: 10px;
@@ -61,7 +61,7 @@ export default class Status extends React.Component {
     } if (this.props.status === 'pending' || this.props.status == 0) {
       return  <StatusBar><Circle status={this.props.status} /> PENDING</StatusBar>
     } else {
-      return  <StatusBar><Circle /> FINISHED</StatusBar>
+      return  <StatusBar><Circle /> COMPLITED</StatusBar>
     }
   }
 

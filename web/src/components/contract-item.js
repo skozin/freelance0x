@@ -13,43 +13,47 @@ const Item = styled.div`
   flex-flow: row nowrap;
   justify-content: space-between;
   width: 100%;
+
+  border-top: 1px solid #E0E0E0;
+  padding: 24px 30px; 
+  box-sizing: border-box;
+
+  &:hover {
+    background: #5E69D7;
+    color: #FFFFFF; 
+  }
 `
 
 const Name = styled.div`
   font-family: 'Proxima Nova';
   font-size: 16px;
   font-weight: 100;
-  width: 70%;
+  width: 55%;
 `
 
 const ExecutionDate = styled.div`
   font-family: 'Proxima Nova';
   font-size: 16px;
   font-weight: 100;
-  width: 70%;
-  color: #242737;
-`
-
-const Name = styled.div`
-  font-family: 'Proxima Nova';
-  font-size: 14px;
-  font-weight: 100;
-  width: 15%;
+  width: 25%;
   color: #7C7C7C;
 
+  ${Item}:hover & {
+    color: #FFFFFF; 
+  }
 `
 
 const StatusWrapper = styled.div`
-  width: 15%;
+  width: 20%;
 `
 
 
-export class ContractItem extends React.Component {
+export default class ContractItem extends React.Component {
   render() {
     return (  
       <Item>
-        <Name></Name>
-        <ExecutionDate></ExecutionDate>
+        <Name>Expense Approval contract</Name>
+        <ExecutionDate>Dec 9, 2017</ExecutionDate>
         <StatusWrapper>
           <Status />
         </StatusWrapper>
