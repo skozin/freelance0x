@@ -125,6 +125,12 @@ const PaymentOverlay = styled.div`
 
 export class NewContract extends React.Component {
 
+  static mapStateToProps(state) {
+    return {
+      account: sel.account(state),
+    }
+  }
+
   componentDidMount = () => {
     this.updateRangeValue()
   }
@@ -133,12 +139,12 @@ export class NewContract extends React.Component {
     return (
       <ContractLayout>
 
-          <FormTitle>Contract Form</FormTitle>
+          <FormTitle>Deploy Contract</FormTitle>
           <FormDescription>
             <Paragraph>Select your prefered payment methodand enter your details.</Paragraph>
             <Paragraph>We use this info for account verification, your credit card won't be charged now.</Paragraph>
           </FormDescription>
-          <ContractorAddress disabled innerRef={node => this.contractorAddressInput = node} value='0x00b3a4e828d0d8bc873dcd33fdcebb7ed2e6edb5' />
+          <ContractorAddress disabled innerRef={node => this.contractorAddressInput = node} value={this.props.account} />
           <InputsContainer>
             <ClientAddress id='clientAddress' innerRef={node => this.clientAddressInput = node} placeholder='Client Address' />
             <ContractName id='contractName' innerRef={node => this.contractNameInput = node} placeholder='Contract Name' />
@@ -202,6 +208,14 @@ export class NewContract extends React.Component {
       };
 
       console.log(requestObj);
+
+      this.props.actions.createContract(
+        requestObj.contractName,
+        requestObj.clientAddress,
+        String(Number(requestObj.hourlyRate) * Math.pow(10, 18)),
+        String(Number(requestObj.hoursHardCap) * 60),
+        String(Number(requestObj.prepayment ) * 10),
+      )
     }
   }
 
