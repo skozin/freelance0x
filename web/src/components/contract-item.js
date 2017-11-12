@@ -64,7 +64,7 @@ export default class ContractItem extends React.Component {
           <Name>{ this.props.name }</Name>
           <ExecutionDate>{ this.state.lastActivityDate }</ExecutionDate>
           <StatusWrapper>
-            <Status />
+            <Status status={this.props.status}/>
           </StatusWrapper>
         </Item>
       </Link>

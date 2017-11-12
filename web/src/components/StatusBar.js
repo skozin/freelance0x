@@ -57,7 +57,7 @@ export default class Status extends React.Component {
     } if (this.props.status === 'pending' || this.props.status == 0) {
       return  <StatusBar><Circle status={this.props.status} /> PENDING</StatusBar>
     } else {
-      return  <StatusBar><Circle /> COMPLITED</StatusBar>
+      return  <StatusBar><Circle />COMPLETED</StatusBar>
     }
   }
 

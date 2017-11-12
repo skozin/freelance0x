@@ -51,7 +51,7 @@ export function ContractsListScreen({contracts}) {
       if (contract.state != -3) {
       return (
         <div key={contract.ephemeralAddress || contract.address}>
-          <ContractItem address={`/contract/${contract.address}`} name={ contract.name } lastActivityDate={ contract.lastActivityDate } />
+          <ContractItem address={`/contract/${contract.address}`} status={ contract.state } name={ contract.name } lastActivityDate={ contract.lastActivityDate } />
         </div>
       )}
     }
