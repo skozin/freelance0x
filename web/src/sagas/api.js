@@ -1,5 +1,6 @@
 import {take, takeEvery, call, fork, select} from 'redux-saga/effects'
 import {push} from 'react-router-redux'
+import { delay } from 'redux-saga'
 import $dispatch from '~/utils/saga-dispatch'
 
 import * as Actions from '~/actions'
@@ -20,6 +21,7 @@ function* $setAccount() {
   let address
   try {
     address = yield call(getAccount)
+    yield delay(1)
   } catch (err) {
     console.error(`Cannot get account: ${err.message}`)
     yield* $dispatch(Actions.failedToConnect(err.message))

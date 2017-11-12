@@ -23,6 +23,8 @@ export default function WelcomeScreen() {
     <WelcomeScreenContainer>
       <NewContractLink to='/new'>New contract</NewContractLink>
       <ParticipateLink to='/participate'>Participate in a contract</ParticipateLink>
+      <ParticipateLink to='/contract'>Contract</ParticipateLink>
+      <ParticipateLink to='/freelancer'>Freelancer</ParticipateLink>
     </WelcomeScreenContainer>
   )
 }

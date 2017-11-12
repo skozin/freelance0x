@@ -1,3 +1,4 @@
+import 'styles/fonts.css'
 import 'styles/main.css'
 import 'styles/normalize.css'
 
@@ -8,7 +9,7 @@ import {AppContainer} from 'react-hot-loader'
 import {Provider} from 'react-redux'
 import store from './store'
 
-import App from '~/app'
+import App from '~/app-integration'
 
 
 const render = Component => {
