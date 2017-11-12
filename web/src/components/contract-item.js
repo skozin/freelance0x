@@ -50,14 +50,16 @@ const StatusWrapper = styled.div`
 
 export default class ContractItem extends React.Component {
   render() {
-    return (  
-      <Item>
-        <Name>Expense Approval contract</Name>
-        <ExecutionDate>Dec 9, 2017</ExecutionDate>
-        <StatusWrapper>
-          <Status />
-        </StatusWrapper>
-      </Item>
+    return (
+      <Link to={ '/' + this.props.address }> 
+        <Item>
+          <Name>Expense Approval contract</Name>
+          <ExecutionDate>Dec 9, 2017</ExecutionDate>
+          <StatusWrapper>
+            <Status />
+          </StatusWrapper>
+        </Item>
+      </Link>
      )
     }
   }  

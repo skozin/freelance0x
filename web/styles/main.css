@@ -41,3 +41,8 @@ input[type=range]:focus {
 input[type=range]:focus::-webkit-slider-runnable-track {
     background: #ccc;
 }
+
+a {
+    text-decoration: none;
+    color: #242737;
+}

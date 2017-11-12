@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import connect from '~/utils/connect'
 import sel from '~/selectors'
@@ -46,14 +46,14 @@ export class ContractList extends React.Component {
 				</Header>
 
 				<ItemWrapper>
-					<ContractItem />
-					<ContractItem />
-					<ContractItem />
-					<ContractItem />
-					<ContractItem />
-					<ContractItem />
-					<ContractItem />
-					<ContractItem />
+					<ContractItem address='0x00b3a4e828d0d8bc873dcd33fdcebb7ed2e6edb5' />
+					<ContractItem address='0x00b3a4e828d0d8bc873dcd33fdcebb7ed2e6edb5' />
+					<ContractItem address='0x00b3a4e828d0d8bc873dcd33fdcebb7ed2e6edb5' />
+					<ContractItem address='0x00b3a4e828d0d8bc873dcd33fdcebb7ed2e6edb5' />
+					<ContractItem address='0x00b3a4e828d0d8bc873dcd33fdcebb7ed2e6edb5' />
+					<ContractItem address='0x00b3a4e828d0d8bc873dcd33fdcebb7ed2e6edb5' />
+					<ContractItem address='0x00b3a4e828d0d8bc873dcd33fdcebb7ed2e6edb5' />
+					<ContractItem address='0x00b3a4e828d0d8bc873dcd33fdcebb7ed2e6edb5' />
 				</ItemWrapper>
 			</ContractLayout>	
 		)

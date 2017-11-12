@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 const WelcomeScreenContainer = styled.div`
   margin-top: 10px;
   line-height: 25px;
+  text-align: center;
 `
 
 const NewContractLink = styled(Link)`
