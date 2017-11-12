@@ -156,12 +156,11 @@ export class NewContract extends React.Component {
 
   static mapStateToProps(state) {
     return {
-      role: "client",
+      role: "contractor",
     }
   }
 
   renderFooter() {
-    console.log(this.props)
     if (this.props.role === 'contractor') {
       return <NewContractBtn onClick={this.createProject}>Pay</NewContractBtn>
       
@@ -178,7 +177,7 @@ export class NewContract extends React.Component {
       <ContractLayout>
           <Inner>
             <Header>The Greatest Contract in the World
-              <Status />
+              <Status status='0'/>
             </Header>
             <Separator/>
             <FormDescription>

@@ -19,25 +19,62 @@ const StatusBar = styled.div`
   align-items: center;
 `
 
+const getColor = (state) => {
+  
+}
+
+
 const Circle = styled.div`
-  background: #8AE7B0;
+  background: ${ (props) => {
+    switch(props.status) {
+      case 'active':
+      case '1':
+      case 1:
+        return '#8AE7B0'
+      case 'pending':
+      case '0':
+      case 0:
+        return '#FFE53A'
+      default:
+        return '#5E69D7'
+      }
+    }};
   width: 10px;
   height: 10px;
   border-radius: 50%;
   margin-right: 8px;
 `
 
-export class Status extends React.Component {
+export default class Status extends React.Component {
+  constructor(props) {
+    super(props);
+    // this.state = {
+    //   status: props.status
+    // }
+    // console.log('props.status', props.status)
+    console.log(this.props)
+  }
+  renderStatus () {
+
+    if (this.props.status === 'active' || this.props.status == 1) {
+      return  <StatusBar><Circle status={this.props.status} /> ACTIVE</StatusBar>
+    } if (this.props.status === 'pending' || this.props.status == 0) {
+      return  <StatusBar><Circle status={this.props.status} /> PENDING</StatusBar>
+    } else {
+      return  <StatusBar><Circle /> FINISHED</StatusBar>
+    }
+  }
 
   render() {
     return (
-    <StatusBar>
-      <Circle />
-      ACTIVE
-    </StatusBar>
+    <div>
+      {
+        this.renderStatus()
+      }
+    </div>
     )
 
   }
 }
 
-export default connect(Status)
+
