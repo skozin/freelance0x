@@ -49,12 +49,20 @@ const StatusWrapper = styled.div`
 
 
 export default class ContractItem extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      lastActivityDate: (new Date(this.props.lastActivityDate * 1000)).toLocaleDateString('en-US', {year: 'numeric', month: 'short', day: 'numeric'})
+    };
+  }
+
   render() {
     return (
-      <Link to={ '/' + this.props.address }> 
+      <Link to={ this.props.address }> 
         <Item>
-          <Name>Expense Approval contract</Name>
-          <ExecutionDate>Dec 9, 2017</ExecutionDate>
+          <Name>{ this.props.name }</Name>
+          <ExecutionDate>{ this.state.lastActivityDate }</ExecutionDate>
           <StatusWrapper>
             <Status />
           </StatusWrapper>
