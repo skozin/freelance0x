@@ -13,7 +13,7 @@ export default class ContractFeedback extends React.Component {
 	}
 
 	onWithdrawClick = () => {
-		this.props.actions2.withdraw()
+		this.props.actions.withdraw()
 	}
 
 	chooseFeedbackType = (e) => {
@@ -39,7 +39,7 @@ export default class ContractFeedback extends React.Component {
 			type: type
 		};
 
-		this.props.actions2.leaveFeedback(requestObj.type, requestObj.messageText)
+		this.props.actions.leaveFeedback(requestObj.type, requestObj.messageText)
 	}
 
 	render () {

@@ -51,7 +51,7 @@ export class ContractDetailsScreen extends React.Component {
       case ContractRole.Client: role = 'client'; break;
     }
 
-    return <ContractDetails {...contract} role={role} />
+    return <ContractDetails {...contract} role={role} actions={this.props.actions} />
   }
 
 }

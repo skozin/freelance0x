@@ -7,7 +7,7 @@ export default class ContractFooter extends React.Component {
   renderPendingFooter () {
     if (this.props.role === 'client') {
       return (
-        <NewContractBtn onClick={() => this.props.actions2.startContract()}>
+        <NewContractBtn onClick={() => this.props.actions.startContract()}>
           Pay
         </NewContractBtn>
       )
@@ -30,8 +30,8 @@ export default class ContractFooter extends React.Component {
       return (
         <Footer>
           <ButtonsWrapper>
-            <Button onClick={() => this.props.actions2.approve()}>APPROVE CONTRACT</Button>
-            <Button thin onClick={() => this.props.actions2.cancel()}>CANCEL CONTRACT</Button>
+            <Button onClick={() => this.props.actions.approve()}>APPROVE CONTRACT</Button>
+            <Button thin onClick={() => this.props.actions.cancel()}>CANCEL CONTRACT</Button>
           </ButtonsWrapper>
         </Footer>
       )
@@ -48,7 +48,7 @@ export default class ContractFooter extends React.Component {
                 {Number(this.props.availableForWithdraw) / Math.pow(10, 18)}
               </AvailableText>
             </Available>
-            <Button transparent onClick={() => this.props.actions2.withdraw()}>WITHDRAW</Button>
+            <Button transparent onClick={() => this.props.actions.withdraw()}>WITHDRAW</Button>
           </ButtonsWrapper>
         </Footer>
       )

@@ -61,7 +61,7 @@ export default class ProjectContract {
       name, clientAddress, hourlyRate, timeCapMinutes, prepayFractionThousands,
       {
         from: accounts[accountIndex],
-        gas: 1000000,
+        gas: 4000000,
       }
     )
     const contract = new ProjectContract(web3, accounts[accountIndex], instance)
@@ -87,15 +87,16 @@ export default class ProjectContract {
   //
   async initialize() {
     const {instance} = this
+    const txOpts = {from: this.account}
     const [name, clientAddress, contractorAddress, hourlyRate,
       timeCapMinutes, prepayFractionThousands, myRole, _] = await Promise.all([
-      instance.name(),
-      instance.clientAddress(),
-      instance.contractorAddress(),
-      instance.hourlyRate(),
-      instance.timeCapMinutes(),
-      instance.prepayFractionThousands(),
-      instance.getRole(),
+      instance.name(txOpts),
+      instance.clientAddress(txOpts),
+      instance.contractorAddress(txOpts),
+      instance.hourlyRate(txOpts),
+      instance.timeCapMinutes(txOpts),
+      instance.prepayFractionThousands(txOpts),
+      instance.getRole(txOpts),
       this.fetch(),
     ])
     this.name = name
@@ -105,21 +106,23 @@ export default class ProjectContract {
     this.timeCapMinutes = timeCapMinutes.toNumber()
     this.prepayFraction = prepayFractionThousands.toNumber() / 1000
     this.myRole = myRole.toNumber();
+    console.debug(`contract ${this.address}, role ${this.myRole}`)
   }
 
   // Fetches mutable contract props.
   //
   async fetch() {
     const {instance} = this
+    const txOpts = {from: this.account}
     const [state, executionDate, endDate, minutesReported,
       lastActivityDate, availableForWithdraw, balance] =
     await Promise.all([
-      instance.state(),
-      instance.executionDate(),
-      instance.endDate(),
-      instance.minutesReported(),
-      instance.lastActivityDate(),
-      instance.availableForWithdraw(),
+      instance.state(txOpts),
+      instance.executionDate(txOpts),
+      instance.endDate(txOpts),
+      instance.minutesReported(txOpts),
+      instance.lastActivityDate(txOpts),
+      instance.availableForWithdraw(txOpts),
       this.web3.eth.getBalance(instance.address),
     ])
     this.state = state.toNumber()

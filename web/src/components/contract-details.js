@@ -17,49 +17,6 @@ import ContractFeedback from './contract-feedback'
 //     Approved: 2,
 class ContractContainer extends React.Component {
 
-  static mapStateToProps(state) {
-    const basicProps = {
-      role: 'contractor',
-      state: 1,
-      name: 'The Greatest Contract in the World',
-      clientAddress: '0x00b3a4e828d0d8bc873dcd33fdcebb7ed2e6edb6',
-      contractorAddress: '0xfe2e794e7151690f3809aa76e553ecd581f858a3',
-      hourlyRate: String(Number(0.25) * Math.pow(10, 18)),
-      timeCapMinutes: String(Number(10) * 60),
-      prepayFraction: '300',
-      minutesReported: String(Number(5.5) * 60),
-      comment: ` I’ve done with the following tasks:
-        — Layout without any logic
-        — Integration API to layout`,
-      availableForWithdraw: String(Number(7.13455323) * Math.pow(10, 18)),
-    }
-
-    return {
-      ...basicProps,
-      actions2: {
-        pay: () => {
-          console.log('Paid!')
-        },
-
-        updateHours: (newMinutesReported, newComment) => {
-          console.log('Updated with: new minutes' + newMinutesReported + ' new comment ' + newComment)
-        },
-
-        withdraw: () => {
-          console.log('Withdraw!')
-        },
-
-        cancel: () => {
-          console.log('Cancel!')
-        },
-
-        submitFeedback: (isGood, comment) => {
-          console.log('Feedback: ' + isGood + ' Comment:' + comment)
-        }
-      }
-    }
-  }
-
   render () {
     const { role, state } = this.props
 
@@ -74,7 +31,7 @@ class ContractContainer extends React.Component {
       )
     }
 
-    if (state === -2 || state === -1 || state === 0) {
+    if (state === -2 || state === -1) {
       return (
         <ContractLayout>
           <SpinnerWrapper>

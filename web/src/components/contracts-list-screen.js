@@ -21,7 +21,7 @@ const FormTitle = styled.h2`
   color: #242737;
   font-size: 36px;
 `
-const NewContract = styled.a`
+const NewContract = styled(Link)`
   text-decoration: none;
   color: black;
   &:before {
@@ -61,7 +61,7 @@ export function ContractsListScreen({contracts}) {
     <ContractLayout nopadding>
       <Header>
         <FormTitle>Contract List</FormTitle>
-        <NewContract href='/new'>New Contract</NewContract>
+        <NewContract to='/new'>New Contract</NewContract>
       </Header>
         <ItemWrapper>
         {contractsEls}

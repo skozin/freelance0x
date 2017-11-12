@@ -19,7 +19,7 @@ export default class ContractProgress extends React.Component {
       isEditing: false
     })
 
-    this.props.actions2.setBillableTime(hours, comment)
+    this.props.actions.setBillableTime(hours, comment)
   }
 
   onCancelClick = () => {
