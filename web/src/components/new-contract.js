@@ -5,6 +5,8 @@ import {Link} from 'react-router-dom'
 import connect from '~/utils/connect'
 import sel from '~/selectors'
 
+import ContractLayout from './freelancer-layout'
+
 const NewContractScreen = styled.div`
   display: flex;
   justify-content: center;
@@ -136,9 +138,8 @@ export class NewContract extends React.Component {
 
   render() {
     return (
-      <NewContractScreen>
+      <ContractLayout>
 
-        <NewContractForm>
           <FormTitle>Contract Form</FormTitle>
           <FormDescription>
             <Paragraph>Select your prefered payment methodand enter your details.</Paragraph>
@@ -160,9 +161,8 @@ export class NewContract extends React.Component {
           </InputsContainer>
 
           <NewContractBtn onClick={this.createProject}>Create Contract</NewContractBtn>
-        </NewContractForm>
 
-      </NewContractScreen>
+      </ContractLayout>
     )
   }
 
