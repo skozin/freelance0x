@@ -73,6 +73,10 @@ const MessageTextArea = styled.textarea`
   border-radius: 5px;
   border: 1px solid #cccccc;
   resize: none;
+  &:focus {
+    outline: none;
+    border-color: #5E69D7;
+  }
 `
 
 const FeedbackOptions = styled.div`
