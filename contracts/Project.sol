@@ -25,7 +25,6 @@ contract Project {
   uint32 public timeCapMinutes;
 
   uint32 public minutesReported;
-  bool public prepayWithdrawn = false;
 
   // making this public breaks Solidity compiler so it starts to output invalid ABI
   string private contractorComment;
@@ -35,6 +34,9 @@ contract Project {
   uint256 public lastActivityDate = now;
   uint256 public executionDate;
   uint256 public endDate;
+
+  uint256 private contractorCredit = 0;
+  uint256 private contractorDebit = 0;
 
   function Project(
     string _name,
@@ -70,6 +72,7 @@ contract Project {
   function start() external payable onlyClient onlyAtState(State.Created) {
     // require(this.balance >= (hourlyRate * timeCapMinutes) / 60);
     state = State.Active;
+    contractorCredit = getPrepay();
     executionDate = now;
     lastActivityDate = now;
   }
@@ -84,6 +87,15 @@ contract Project {
     return Role.Stranger;
   }
 
+  function getPrepay() public view returns (uint256) {
+    uint256 priceCap = getPriceCap();
+    return (priceCap * prepayFractionThousands) / 1000;
+  }
+
+  function getPriceCap() public view returns (uint256) {
+    return (hourlyRate * timeCapMinutes) / 60;
+  }
+
   function availableForWithdraw() public view returns (uint) {
     if (state == State.Created) {
       return 0;
@@ -91,38 +103,23 @@ contract Project {
 
     Role role = getRole();
 
-    uint256 totalPrice = (hourlyRate * timeCapMinutes) / 60;
-    uint256 prepay = (totalPrice * prepayFractionThousands) / 1000;
+    if (role == Role.Stranger) {
+      return 0;
+    }
+
+    assert(contractorCredit >= contractorDebit);
+    uint256 availableToContractor = contractorCredit - contractorDebit;
 
     if (role == Role.Contractor) {
-      if (state == State.Active || state == State.Cancelled) {
-        if (prepayWithdrawn) {
-          return 0;
-        } else {
-          return prepay;
-        }
-      }
-      if (state == State.Approved) {
-        return this.balance;
-      }
-      assert(false);
+      return availableToContractor;
     }
 
     if (role == Role.Client) {
-      if (state == State.Cancelled) {
-        return totalPrice - prepay;
-      }
-      if (state == State.Approved) {
-        uint256 approvedPrice = (hourlyRate * minutesReported) / 60;
-        if (approvedPrice < prepay) {
-          approvedPrice = prepay;
-        }
-        assert(approvedPrice <= this.balance);
-        return this.balance - approvedPrice;
-      }
+      assert(this.balance >= availableToContractor);
+      return this.balance - availableToContractor;
     }
 
-    return 0;
+    assert(false);
   }
 
   function setBillableTime(uint32 timeMinutes, string comment)
@@ -133,24 +130,30 @@ contract Project {
     lastActivityDate = now;
   }
 
-  function approve() onlyClient onlyAtState(State.Active) external {
+  function approve() external {
     state = State.Approved;
     endDate = now;
     lastActivityDate = now;
-    // withdraw();
+
+    uint256 approvedPrice = (hourlyRate * minutesReported) / 60;
+    if (approvedPrice > contractorCredit) {
+      contractorCredit = approvedPrice;
+    }
   }
 
   function cancel() onlyClient onlyAtState(State.Active) external {
     state = State.Cancelled;
     endDate = now;
     lastActivityDate = now;
-    withdraw();
   }
 
   function withdraw() public {
     lastActivityDate = now;
     uint256 toBeSent = availableForWithdraw();
     if (toBeSent > 0) {
+      if (getRole() == Role.Contractor) {
+        contractorDebit = contractorDebit + toBeSent;
+      }
       msg.sender.transfer(toBeSent);
     }
   }
