@@ -15,6 +15,7 @@ const Header = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	margin: 60px 30px 50px 30px;
 `
 const FormTitle = styled.h2`
   color: #242737;
