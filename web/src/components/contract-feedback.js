@@ -8,47 +8,17 @@ import Button from './Button'
 
 export default class ContractFeedback extends React.Component {
 	state = {
-		bad: false,
-		good: false
+		good: true,
+		bad: false
 	}
 
-	render() {
-		return (
-			<ContractFeedbackView>
-      	<FormTitle>The greatest contract in the World</FormTitle>
-      	<Separator/>
-      	<FormDescription>
-          <p>Please, give a feedback for freelancer.</p>
-        </FormDescription>
-      	<FeedbackOptions>
-      		<GoodEmojiContainer data='good' onClick={((e) => this.chooseFeedbackType(e))} chosen={this.state.good}/>
-      		or
-      		<BadEmojiContainer data='bad' onClick={((e) => this.chooseFeedbackType(e))} chosen={this.state.bad}/>
-      	</FeedbackOptions>
-				<Message>
-					<MessageLabel>message</MessageLabel>
-					<MessageTextArea innerRef={node => this.messageText = node}/>
-				</Message>
-      	<FormBtn onClick={ this.sendFeedback }>Send a Feedback</FormBtn>
-
-				<Footer>
-					<ButtonsWrapper>
-						<Available>
-							<AvailableLabel>AVAILABLE</AvailableLabel>
-							<AvailableText>
-								<span>Ξ</span>
-								0.912381123
-              </AvailableText>
-						</Available>
-						<Button transparent>WITHDRAW</Button>
-					</ButtonsWrapper>
-				</Footer>
-			</ContractFeedbackView>
-    )
+	onWithdrawClick = () => {
+		this.props.actions2.withdraw()
 	}
 
 	chooseFeedbackType = (e) => {
 		const data = e.target.getAttribute('data');
+
 		if (data === 'good') {
 			this.setState({
 				bad: false,
@@ -65,11 +35,54 @@ export default class ContractFeedback extends React.Component {
 	sendFeedback = () => {
 		const type = this.state.bad ? 'bad' : 'good';
 		const requestObj = {
-      messageText: this.messageText.value,
-      type: type
-    };
+			messageText: this.messageText.value,
+			type: type
+		};
 
-    console.log(requestObj);
+		this.props.actions2.leaveFeedback(requestObj.type, requestObj.messageText)
+	}
+
+	render () {
+		const { availableForWithdraw, role } = this.props
+
+		return (
+			<ContractFeedbackView>
+      	<FormTitle>The greatest contract in the World</FormTitle>
+      	<Separator/>
+      	<FormDescription>
+					<p>Please, give a feedback for {role === 'client' ? 'client' : 'contractor'}.</p>
+        </FormDescription>
+      	<FeedbackOptions>
+					<GoodEmojiContainer
+						data='good'
+						onClick={((e) => this.chooseFeedbackType(e))}
+						chosen={this.state.good} />
+      		or
+					<BadEmojiContainer
+						data='bad'
+						onClick={((e) => this.chooseFeedbackType(e))}
+						chosen={this.state.bad} />
+      	</FeedbackOptions>
+				<Message>
+					<MessageLabel>message</MessageLabel>
+					<MessageTextArea innerRef={node => this.messageText = node}/>
+				</Message>
+      	<FormBtn onClick={() => this.sendFeedback()}>Leave a Feedback</FormBtn>
+
+				<Footer>
+					<ButtonsWrapper>
+						<Available>
+							<AvailableLabel>AVAILABLE</AvailableLabel>
+							<AvailableText>
+								<span>Ξ</span>
+								{Number(availableForWithdraw) / Math.pow(10, 18)}
+              </AvailableText>
+						</Available>
+						<Button transparent onClick={() => this.onWithdrawClick()}>WITHDRAW</Button>
+					</ButtonsWrapper>
+				</Footer>
+			</ContractFeedbackView>
+    )
 	}
 }
 
@@ -81,52 +94,66 @@ const ContractFeedbackView = styled.div`
 `
 
 const FormTitle = styled.h2`
-  color: #242737;
-  font-size: 36px;
-  align-self: center;
+	font-family: 'Muller';
+	font-weight: 500;
+	font-size: 28px;
+	color: #242737;
+	letter-spacing: -0.85px;
+	align-self: center;
 `
 
 const FormBtn = styled.a`
   display: block;
   width: 100%;
   align-self: flex-end;
-  padding: 16px;
+  padding: 16px 16px 14px;
   margin-top: 20px;
-  border: 1px solid;
   cursor: pointer;
-  box-sizing: border-box;
-  text-align: center;
   background-color: #5E69D7;
-  color: white;
   text-transform: uppercase;
   border-radius: 3px;
-  transition: background 0.2s;
+
+	font-family: 'Muller';
+	font-size: 16px;
+	font-weight: bold;
+	color: #FFFFFF;
+	letter-spacing: -0.48px;
+  text-align: center;
+
+	transition: background-color 0.2s ease;
+	will-change: background-color;
+
   &:hover {
     background-color: #5964CC;
-  }
+	}
+
   &:active {
     background-color: #5660C4;
   }
 `
 
 const Separator = styled.div`
-    content: '';
-    display: block;
-    width: 70px;
-    height: 2px;
-    border-radius: 3px;
-    background: #5E69D7;
-    margin-top: 24px;
-    margin-bottom: 32px;
-    align-self: center;
-    letter-spacing: 0.76px;
+	content: '';
+	display: block;
+	width: 70px;
+	height: 2px;
+	border-radius: 3px;
+	background: #5E69D7;
+	margin-top: 24px;
+	margin-bottom: 32px;
+	align-self: center;
+	letter-spacing: 0.76px;
 `
 
 const FormDescription = styled.div`
   text-align: center;
   vertical-align: middle;
-  margin-bottom: 6px;
-  font-size: 18px;
+
+	font-family: 'Proxima Nova';
+	font-size: 16px;
+	color: #242737;
+	letter-spacing: -0.42px;
+	line-height: 22px;
 `
 
 const Message = styled.div`
@@ -148,13 +175,13 @@ const MessageTextArea = styled.textarea`
   font-size: 14px;
   border-radius: 3px;
   border: 1px solid #cccccc;
-  resize: none;
+	resize: none;
+
   &:focus {
     outline: none;
     border-color: #5E69D7;
   }
 `
-
 const FeedbackOptions = styled.div`
 	display: flex;
 	align-items: center;
@@ -167,9 +194,11 @@ const GoodEmojiContainer = styled.div`
 	background: url(${good_feedback}) no-repeat center / contain;
 	margin-right: 20px;
 	opacity: 0.6;
+
 	&:hover {
 		opacity: 1;
 	}
+
 	cursor: pointer;
 	opacity: ${props => props.chosen ? '1' : '0.6'};
 	transition: opacity 0.2s;

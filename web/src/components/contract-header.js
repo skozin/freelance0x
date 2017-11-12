@@ -148,7 +148,7 @@ export default class ContractHeader extends React.Component {
             </Rate>
             <Prepayment>
               PREPAYMENT
-                <span>{`${Number(prepayFraction) * 100}`}%</span>
+                <span>{`${Number(prepayFraction) / 10}`}%</span>
             </Prepayment>
           </Payment>
           <Total>

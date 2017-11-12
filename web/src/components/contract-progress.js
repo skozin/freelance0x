@@ -14,12 +14,12 @@ export default class ContractProgress extends React.Component {
     })
   }
 
-  onUpdateClick = () => {
+  onUpdateClick = (hours, comment) => {
     this.setState({
       isEditing: false
     })
 
-    this.props.actions2.updateHours()
+    this.props.actions2.setBillableTime(hours, comment)
   }
 
   onCancelClick = () => {
@@ -54,27 +54,31 @@ export default class ContractProgress extends React.Component {
               <Editing>
                 <Comment>
                   <CommentTitle>COMMENT</CommentTitle>
-                  <CommentTextarea>
-                    { comment }
-                  </CommentTextarea>
+                  <CommentTextarea
+                    innerRef={comment => this.comment = comment}
+                    defaultValue={comment} />
                 </Comment>
                 <BarEditing>
                   <BarLabel>TIME SPENT</BarLabel>
                   <BarHoursEditing>
                     <BarInput
-                      ref="minutes"
+                      innerRef={node => this.hours = node}
                       type="number"
                       placeholder="3"
-                      value={Number(minutesReported) / 60} />
+                      defaultValue={Number(minutesReported) / 60} />
                     <span>/</span>
-                    {timeCapMinutes} hours
+                    {Number(timeCapMinutes) / 60} hours
                   </BarHoursEditing>
                 </BarEditing>
               </Editing>
               <Footer>
                 <ButtonsWrapper>
-                  <Button onClick={() => this.onUpdateClick()}>UPDATE</Button>
-                  <Button onClick={() => this.onCancelClick()} thin>CANCEL EDITING</Button>
+                  <Button onClick={() => this.onUpdateClick(this.hours.value, this.comment.value)}>
+                    UPDATE
+                  </Button>
+                  <Button onClick={() => this.onCancelClick()} thin>
+                    CANCEL EDITING
+                  </Button>
                 </ButtonsWrapper>
               </Footer>
             </IsEditing>
@@ -83,7 +87,7 @@ export default class ContractProgress extends React.Component {
               <Bar>
                 <BarHead>
                   <BarLabel>TIME SPENT</BarLabel>
-                  <BarHours>{Number(minutesReported) / 60} / { Number(timeCapMinutes) / 60} hours</BarHours>
+                  <BarHours>{Number(minutesReported) / 60} / {Number(timeCapMinutes) / 60} hours</BarHours>
                 </BarHead>
                 <BarLine>
                   <BarLineInner timeCapMinutes={timeCapMinutes} minutesReported={minutesReported} />
@@ -95,11 +99,14 @@ export default class ContractProgress extends React.Component {
                   { comment }
                 </CommentText>
               </Comment>
-              <Footer>
-                <ButtonsWrapper>
-                  <Button onClick={() => this.onEditClick()}>EDIT</Button>
-                </ButtonsWrapper>
-              </Footer>
+              {
+                role === 'contractor' &&
+                  <Footer>
+                    <ButtonsWrapper>
+                      <Button onClick={() => this.onEditClick()}>EDIT</Button>
+                    </ButtonsWrapper>
+                  </Footer>
+              }
             </IsNotEditing>
         }
       </Progress>
@@ -113,7 +120,7 @@ const Progress = styled.div`
 
 const ProgressTitle = styled.div`
   font-family: 'Muller';
-  font-weight: bold;
+  font-weight: 500;
   font-size: 26px;
   color: #242737;
   letter-spacing: -0.79px;
