@@ -141,8 +141,7 @@ export class NewContract extends React.Component {
 
           <FormTitle>Deploy Contract</FormTitle>
           <FormDescription>
-            <Paragraph>Select your prefered payment methodand enter your details.</Paragraph>
-            <Paragraph>We use this info for account verification, your credit card won't be charged now.</Paragraph>
+            <Paragraph>Please, set contract details.</Paragraph>
           </FormDescription>
           <ContractorAddress disabled innerRef={node => this.contractorAddressInput = node} value={this.props.account} />
           <InputsContainer>
