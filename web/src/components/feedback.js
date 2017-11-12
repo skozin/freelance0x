@@ -130,8 +130,8 @@ export class Feedback extends React.Component {
       		<BadEmojiContainer data='bad' onClick={((e) => this.chooseFeedbackType(e))} chosen={this.state.bad}/>
       	</FeedbackOptions>
       	<MessageLabel>message</MessageLabel>
-      	<MessageTextArea/>
-      	<FormBtn>Send a Feedback</FormBtn>
+      	<MessageTextArea innerRef={node => this.messageText = node}/>
+      	<FormBtn onClick={ this.sendFeedback }>Send a Feedback</FormBtn>
       </ContractLayout>
     )
 	}
@@ -149,6 +149,16 @@ export class Feedback extends React.Component {
 				good: false
 			})
 		}
+	}
+
+	sendFeedback = () => {
+		const type = this.state.bad ? 'bad' : 'good';
+		const requestObj = {
+      messageText: this.messageText.value,
+      type: type
+    };
+
+    console.log(requestObj);
 	}
 }
 
