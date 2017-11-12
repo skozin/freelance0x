@@ -71,13 +71,14 @@ export default class ProjectContract {
   async initialize() {
     const {instance} = this
     const [name, clientAddress, contractorAddress, hourlyRate,
-      timeCapMinutes, prepayFractionThousands, _] = await Promise.all([
+      timeCapMinutes, prepayFractionThousands, myRole, _] = await Promise.all([
       instance.name(),
       instance.clientAddress(),
       instance.contractorAddress(),
       instance.hourlyRate(),
       instance.timeCapMinutes(),
       instance.prepayFractionThousands(),
+      // instance.getRole(),
       this.fetch(),
     ])
     this.name = name
@@ -86,6 +87,7 @@ export default class ProjectContract {
     this.hourlyRate = new BigNumber('' + hourlyRate)
     this.timeCapMinutes = timeCapMinutes.toNumber()
     this.prepayFraction = prepayFractionThousands.toNumber() / 1000
+    this.myRole = myRole;
   }
 
   // Fetches mutable contract props.
@@ -120,10 +122,34 @@ export default class ProjectContract {
     return this.instance.address
   }
 
-  async start() {
-    await assertTxSucceeds(this.instance.start({
+  start() {
+    return this._invokeInstanceFunction('start', 100000)
+  }
+
+  setBillableTime(timeMinutes, comment) {
+    return this._invokeInstanceFunction('setBillableTime', 100000, [timeMinutes, comment])
+  }
+
+  approve() {
+    return this._invokeInstanceFunction('approve', 100000)
+  }
+
+  cancel() {
+    return this._invokeInstanceFunction('cancel', 100000)
+  }
+
+  withdraw() {
+    return this._invokeInstanceFunction('withdraw', 100000)
+  }
+
+  leaveFeedback(positive, comment) {
+    return this._invokeInstanceFunction('leaveFeedback', 100000, [positive, comment])
+  }
+
+  async _invokeInstanceFunction(name, gas, args = []) {
+    await assertTxSucceeds(this.instance[name](...args, {
       from: this.account,
-      gas: 100000,
+      gas: gas,
     }))
     await this.fetch()
   }

@@ -9,6 +9,12 @@ contract Project {
     Cancelled
   }
 
+  enum Role {
+    Stranger,
+    Contractor,
+    Client
+  }
+
   string public name;
   State public state;
 
@@ -17,7 +23,11 @@ contract Project {
 
   uint32 public prepayFractionThousands;
   uint32 public timeCapMinutes;
+
   uint32 public minutesReported;
+
+  // making this public breaks Solidity compiler so it starts to output invalid ABI
+  string private contractorComment;
 
   uint256 public hourlyRate;
 
@@ -42,6 +52,41 @@ contract Project {
   function start() external {
     state = State.Active;
     executionDate = now;
+  }
+
+  function getRole() public view returns (Role) {
+    if (msg.sender == clientAddress) {
+      return Role.Client;
+    }
+    if (msg.sender == contractorAddress) {
+      return Role.Contractor;
+    }
+    return Role.Stranger;
+  }
+
+  function setBillableTime(uint32 timeMinutes, string comment) external {
+    minutesReported = timeMinutes;
+    contractorComment = comment;
+  }
+
+  function approve() external {
+    state = State.Approved;
+    endDate = now;
+  }
+
+  function cancel() external {
+    state = State.Cancelled;
+    endDate = now;
+  }
+
+  function withdraw() external {
+    if (this.balance > 0) {
+      msg.sender.transfer(this.balance);
+    }
+  }
+
+  function leaveFeedback(bool positive, string comment) external {
+    // TODO
   }
 
 }
