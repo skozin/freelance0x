@@ -7,6 +7,13 @@ import {assertTxSucceeds} from '~/utils/tx-utils'
 import ProjectABI from '../../build/contracts/Project.json'
 
 
+const accountIndex = (() => {
+  const match = /[?]acc(?:ount)?=(\d+)/.exec(window.location.search)
+  console.debug('acct match:', match)
+  return (match && match[1]) ? +match[1] : 0
+})()
+
+
 async function getAPI() {
   const web3 = await getWeb3()
   const accounts = await web3.eth.accounts
@@ -21,7 +28,7 @@ const apiPromise = getAPI()
 
 export async function getAccount() {
   const {accounts} = await apiPromise
-  return accounts[0]
+  return accounts[accountIndex]
 }
 
 
@@ -53,11 +60,11 @@ export default class ProjectContract {
     const instance = await Project.new(
       name, clientAddress, hourlyRate, timeCapMinutes, prepayFractionThousands,
       {
-        from: accounts[0],
+        from: accounts[accountIndex],
         gas: 1000000,
       }
     )
-    const contract = new ProjectContract(web3, accounts[0], instance)
+    const contract = new ProjectContract(web3, accounts[accountIndex], instance)
     await contract.initialize()
     return contract
   }
@@ -65,7 +72,7 @@ export default class ProjectContract {
   static async at(address) {
     const {web3, accounts, Project} = await apiPromise
     const instance = await Project.at(address).then(x => x)
-    const contract = new ProjectContract(web3, accounts[0], instance)
+    const contract = new ProjectContract(web3, accounts[accountIndex], instance)
     await contract.initialize()
     return contract
   }
