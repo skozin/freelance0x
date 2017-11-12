@@ -23,14 +23,14 @@ const FormBtn = styled.a`
   padding: 16px;
   margin-top: 20px;
   border: 1px solid;
-  border-radius: 2px;
   cursor: pointer;
   box-sizing: border-box;
   text-align: center;
   background-color: #5E69D7;
   color: white;
   text-transform: uppercase;
-  border-radius: 5px;
+  border-radius: 3px;
+  transition: background 0.2s;
   &:hover {
     background-color: #5964CC;
   }
@@ -70,7 +70,7 @@ const MessageTextArea = styled.textarea`
   width: 100%;
   box-sizing: border-box;
   font-size: 14px;
-  border-radius: 5px;
+  border-radius: 3px;
   border: 1px solid #cccccc;
   resize: none;
   &:focus {
@@ -89,25 +89,27 @@ const GoodEmojiContainer = styled.div`
 	width: 64px;
 	height: 64px;
 	background: url(${good_feedback}) no-repeat center / contain;
-	margin-right: 10px;
+	margin-right: 20px;
 	opacity: 0.6;
 	&:hover {
 		opacity: 1;
 	}
 	cursor: pointer;
 	opacity: ${props => props.chosen ? '1' : '0.6'};
+	transition: opacity 0.2s;
 `
 const BadEmojiContainer = styled.div`
 	width: 64px;
 	height: 64px;
 	background: url(${bad_feedback}) no-repeat center / contain;
-	margin-left: 10px;
+	margin-left: 20px;
 	opacity: 0.6;
 	&:hover {
 		opacity: 1;
 	}
 	cursor: pointer;
 	opacity: ${props => props.chosen ? '1' : '0.6'};
+	transition: opacity 0.2s;
 `
 
 export class Feedback extends React.Component {
