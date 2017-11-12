@@ -75,7 +75,7 @@ class ContractContainer extends React.Component {
       )
     }
 
-    if (state === -2 || state === -1 || state === 0) {
+    if (state === -2 || state === -1) {
       return (
         <ContractLayout>
           <SpinnerWrapper>
@@ -96,7 +96,10 @@ class ContractContainer extends React.Component {
     return (
       <ContractLayout>
         <ContractHeader {...this.props} />
-        <ContractProgress {...this.props} />
+        {
+          state !== 0 &&
+            <ContractProgress {...this.props} />
+        }
         <ContractFooter {...this.props} />
       </ContractLayout>
     )
