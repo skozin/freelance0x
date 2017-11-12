@@ -2,6 +2,59 @@ import React from 'react'
 import styled from 'styled-components'
 import Status from './StatusBar'
 
+export default class ContractHeader extends React.Component {
+  render() {
+    let {
+      name,
+      state,
+      clientAddress,
+      contractorAddress,
+      hourlyRate,
+      timeCapMinutes,
+      prepayFraction,
+      minutesReported
+    } = this.props
+
+    return (
+      <Inner>
+        <Header>{name}
+          <Status status={state} />
+        </Header>
+        <Separator />
+        <FormDescription>
+          <Wallets>
+            <Contractor>
+              CONTRACTOR ADDRESS
+              <span>{contractorAddress}</span>
+            </Contractor>
+            <Contractor>
+              CLIENT ADDRESS
+              <span>{clientAddress}</span>
+            </Contractor>
+          </Wallets>
+          <Payment>
+            <Rate>
+              HOURLY RATE
+              <span>
+                <ETHIcon>Ξ</ETHIcon>
+                {Number(hourlyRate) / Math.pow(10, 18)}
+              </span>
+            </Rate>
+            <Prepayment>
+              PREPAYMENT
+                <span>{`${Number(prepayFraction) / 10}`}%</span>
+            </Prepayment>
+          </Payment>
+          <Total>
+            TOTAL
+              <span><ETHIcon>Ξ</ETHIcon> {Number(hourlyRate) / Math.pow(10, 18) * (Number(timeCapMinutes) / 60)}</span>
+          </Total>
+        </FormDescription>
+      </Inner>
+    )
+  }
+}
+
 const Header = styled.div`
   display: flex;
   flex-flow: row nowrap;
@@ -121,56 +174,3 @@ const Total = styled.div`
 const Inner = styled.div`
 
 `
-
-export default class ContractHeader extends React.Component {
-  render() {
-    let {
-      name,
-      state,
-      clientAddress,
-      contractorAddress,
-      hourlyRate,
-      timeCapMinutes,
-      prepayFraction,
-      minutesReported
-    } = this.props
-
-    return (
-      <Inner>
-        <Header>{name}
-          <Status status={state} />
-        </Header>
-        <Separator />
-        <FormDescription>
-          <Wallets>
-            <Contractor>
-              CONTRACTOR ADDRESS
-              <span>{contractorAddress}</span>
-            </Contractor>
-            <Contractor>
-              CLIENT ADDRESS
-              <span>{clientAddress}</span>
-            </Contractor>
-          </Wallets>
-          <Payment>
-            <Rate>
-              HOURLY RATE
-              <span>
-                <ETHIcon>Ξ</ETHIcon>
-                {Number(hourlyRate) / Math.pow(10, 18)}
-              </span>
-            </Rate>
-            <Prepayment>
-              PREPAYMENT
-                <span>{`${Number(prepayFraction) / 10}`}%</span>
-            </Prepayment>
-          </Payment>
-          <Total>
-            TOTAL
-              <span><ETHIcon>Ξ</ETHIcon> {Number(hourlyRate) / Math.pow(10, 18) * (Number(timeCapMinutes) / 60)}</span>
-          </Total>
-        </FormDescription>
-      </Inner>
-    )
-  }
-}
