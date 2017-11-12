@@ -6,7 +6,7 @@ import connect from '~/utils/connect'
 import sel from '~/selectors'
 
 import background from '../../assets/background.png'
-import logo from '../../assets/freelance0x_logo.svg'
+import logo from '../../assets/logo.svg'
 
 
 const Contract = styled.div`
@@ -17,6 +17,9 @@ const Contract = styled.div`
 `
 
 const Logo = styled(Link)`
+  position: absolute;
+  top: 60px;
+  left: 70px;
   width: 85px;
   height: 85px;
   background: url(${logo}) no-repeat center / contain;
@@ -53,7 +56,7 @@ export class NewContract extends React.Component {
       <Contract>
         <Logo to='/' />
         <Field>
-        {children}    
+          {children}    
         </Field>
       </Contract>
     )
