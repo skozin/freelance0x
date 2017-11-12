@@ -78,7 +78,7 @@ export default class ProjectContract {
       instance.hourlyRate(),
       instance.timeCapMinutes(),
       instance.prepayFractionThousands(),
-      // instance.getRole(),
+      instance.getRole(),
       this.fetch(),
     ])
     this.name = name
