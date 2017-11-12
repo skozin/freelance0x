@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 import good_feedback from '../../assets/good_feedback.png'
 import bad_feedback from '../../assets/bad_feedback.png'
@@ -50,6 +51,9 @@ export default class ContractFeedback extends React.Component {
 					<FeedbackSended>
 						<Emoji>👍</Emoji>
 						<FeedbackText>Thank you for the feedback</FeedbackText>
+						<Back to="/">
+							Back to Contract List
+						</Back>
 					</FeedbackSended>
 				</ContractFeedbackView>
 			)
@@ -268,7 +272,7 @@ const ButtonsWrapper = styled.div`
 `
 
 const Footer = styled.div`
-  margin-top: 32px;
+  margin-top: 40px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -297,5 +301,26 @@ const AvailableText = styled.div`
   span {
     font-family: 'Arial';
     margin-right: 8px;
+  }
+`
+
+const Back = styled(Link)`
+	margin-top: 16px;
+	font-family: 'Proxima Nova';
+	font-size: 16px;
+	color: #5E69D7;
+	letter-spacing: -0.48px;
+	line-height: 22px;
+	border-bottom: 1px solid #5e69d7;
+
+	transition: color 0.2s ease;
+	will-change: color;
+
+  &:hover {
+    color: #5964CC;
+	}
+
+  &:active {
+    color: #5660C4;
   }
 `

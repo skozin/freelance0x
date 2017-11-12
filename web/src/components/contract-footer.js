@@ -131,21 +131,26 @@ const StateOneMessage = styled.div`
   margin-top: 60px;
 `
 
-const NewContractBtn = styled.a`
-  display: block;
+const NewContractBtn = styled.div`
   width: 100%;
   align-self: flex-end;
-  padding: 16px;
-  margin-top: 60px;
-  border: 1px solid;
-  border-radius: 2px;
+  padding: 16px 16px 14px;
+  margin-top: 20px;
   cursor: pointer;
   box-sizing: border-box;
   text-align: center;
   background-color: #5E69D7;
   color: white;
   text-transform: uppercase;
-  border-radius: 5px;
+  border-radius: 3px;
+
+  font-family: 'Muller';
+  font-weight: 600;
+  font-size: 16px;
+  color: #FFFFFF;
+  letter-spacing: -0.48px;
+
+  transition: background-color 0.2s ease;
 
   &:hover {
     background-color: #5964CC;
