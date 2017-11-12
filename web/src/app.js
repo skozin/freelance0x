@@ -7,7 +7,7 @@ import Layout from './components/layout'
 import WelcomeScreen from './components/welcome-screen'
 import NewContract from './components/new-contract'
 import Contract from './components/contract'
-import FreelancerLayout from './components/freelancer-layout'
+import Feedback from './components/feedback'
 
 export default function App() {
   return (
@@ -16,7 +16,7 @@ export default function App() {
         <Route exact path='/' component={WelcomeScreen} />
         <Route exact path='/new' component={NewContract} />
         <Route exact path='/contract' component={Contract} />
-        <Route exact path='/freelancer' component={FreelancerLayout} />
+        <Route exact path='/feedback' component={Feedback} />
       </Layout>
     </BrowserRouter>
   )
