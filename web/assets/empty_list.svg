@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="62px" height="84px" viewBox="0 0 62 84" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>иконка0</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="-3.05365854%" y1="50.0105431%" x2="103.072967%" y2="50.0105431%" id="linearGradient-1">
+            <stop stop-color="#4953FD" offset="0%"></stop>
+            <stop stop-color="#606CFC" offset="12.33%"></stop>
+            <stop stop-color="#5C81F4" offset="30.89%"></stop>
+            <stop stop-color="#A4D0DE" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="-3.05365854%" y1="49.9450739%" x2="103.072967%" y2="49.9450739%" id="linearGradient-2">
+            <stop stop-color="#4953FD" offset="0%"></stop>
+            <stop stop-color="#606CFC" offset="12.33%"></stop>
+            <stop stop-color="#5C81F4" offset="30.89%"></stop>
+            <stop stop-color="#A4D0DE" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="0.0319620253%" y1="50.1605263%" x2="100.064557%" y2="50.1605263%" id="linearGradient-3">
+            <stop stop-color="#5E69D7" offset="0%"></stop>
+            <stop stop-color="#5FB4D8" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="0.0324758842%" y1="52.04%" x2="100.03119%" y2="52.04%" id="linearGradient-4">
+            <stop stop-color="#5E69D7" offset="0%"></stop>
+            <stop stop-color="#5FB4D8" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="0.0324758842%" y1="48.868%" x2="100.03119%" y2="48.868%" id="linearGradient-5">
+            <stop stop-color="#5E69D7" offset="0%"></stop>
+            <stop stop-color="#5FB4D8" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="0.0324758842%" y1="52.284%" x2="100.03119%" y2="52.284%" id="linearGradient-6">
+            <stop stop-color="#5E69D7" offset="0%"></stop>
+            <stop stop-color="#5FB4D8" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="0.055801105%" y1="51.16%" x2="100.320442%" y2="51.16%" id="linearGradient-7">
+            <stop stop-color="#5E69D7" offset="0%"></stop>
+            <stop stop-color="#5FB4D8" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="0.110989011%" y1="50.204%" x2="99.8241758%" y2="50.204%" id="linearGradient-8">
+            <stop stop-color="#5E69D7" offset="0%"></stop>
+            <stop stop-color="#5FB4D8" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="-6.04054054%" y1="49.9783784%" x2="105.517568%" y2="49.9783784%" id="linearGradient-9">
+            <stop stop-color="#4953FD" offset="0%"></stop>
+            <stop stop-color="#606CFC" offset="12.33%"></stop>
+            <stop stop-color="#5C81F4" offset="30.89%"></stop>
+            <stop stop-color="#A4D0DE" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="-9.87241379%" y1="49.9428571%" x2="110.132184%" y2="49.9428571%" id="linearGradient-10">
+            <stop stop-color="#4953FD" offset="0%"></stop>
+            <stop stop-color="#606CFC" offset="12.33%"></stop>
+            <stop stop-color="#5C81F4" offset="30.89%"></stop>
+            <stop stop-color="#A4D0DE" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="-50.7529412%" y1="49.4736842%" x2="149.658824%" y2="49.4736842%" id="linearGradient-11">
+            <stop stop-color="#A2CDDF" offset="89.38%"></stop>
+            <stop stop-color="#A4D0DE" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="иконка0" transform="translate(1.000000, 1.000000)">
+            <path d="M60,59.2971246 L60,73.5015974 C60,78.2364217 56.097561,82 51.4634146,82 L8.53658537,82 C3.7804878,82 0,78.115016 0,73.5015974 L0,44" id="XMLID_14_" stroke="url(#linearGradient-1)" stroke-width="2" stroke-linecap="round"></path>
+            <path d="M0,34.0344828 L0,8.44827586 C0,3.74137931 3.90243902,0 8.53658537,0 L51.4634146,0 C56.2195122,0 60,3.86206897 60,8.44827586 L60,49" id="XMLID_13_" stroke="url(#linearGradient-2)" stroke-width="2" stroke-linecap="round"></path>
+            <path d="M46.7151899,14 L13.2848101,14 C12.0822785,14 11,13.3684211 11,12.5 C11,11.7105263 11.9620253,11 13.2848101,11 L46.7151899,11 C47.9177215,11 49,11.6315789 49,12.5 C49,13.2894737 48.0379747,14 46.7151899,14 Z" id="XMLID_12_" fill="url(#linearGradient-3)" fill-rule="nonzero"></path>
+            <rect id="XMLID_10_" fill="url(#linearGradient-4)" fill-rule="nonzero" x="11" y="34" width="38" height="2"></rect>
+            <rect id="XMLID_9_" fill="url(#linearGradient-5)" fill-rule="nonzero" x="11" y="39" width="38" height="2"></rect>
+            <rect id="XMLID_8_" fill="url(#linearGradient-6)" fill-rule="nonzero" x="11" y="44" width="38" height="2"></rect>
+            <rect id="XMLID_7_" fill="url(#linearGradient-7)" fill-rule="nonzero" x="11" y="49" width="22" height="2"></rect>
+            <rect id="XMLID_6_" fill="url(#linearGradient-8)" fill-rule="nonzero" x="11" y="65" width="11" height="2" rx="1"></rect>
+            <path d="M51,65 C51,69.9864865 46.9864865,74 42,74 C37.0135135,74 33,69.9864865 33,65 C33,60.0135135 37.0135135,56 42,56 C43.2162162,56 44.3108108,56.2432432 45.2837838,56.6081081" id="XMLID_5_" stroke="url(#linearGradient-9)" stroke-width="2" stroke-linecap="round"></path>
+            <polyline id="XMLID_4_" stroke="url(#linearGradient-10)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="37 63.875 41.5517241 69 48 62"></polyline>
+            <path d="M50,60 L52,58" id="XMLID_3_" stroke="url(#linearGradient-11)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </g>
+    </g>
+</svg>

@@ -14,11 +14,12 @@ const Contract = styled.div`
   justify-content: center;
   padding: 0 40px;
   background: url(${background}) no-repeat center / cover;
+  background-attachment: fixed;
   color: #242738;
 `
 
 const Logo = styled(Link)`
-  position: absolute;
+  position: fixed;
   top: 60px;
   left: 70px;
   width: 85px;
@@ -32,26 +33,23 @@ const Field = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 700px;
-  height: 600px;
-  margin: 100px 0;
-  padding: 60px 30px;
+  margin: 60px 0;
+  padding: ${props => props.nopadding ? '0 0' : '60px 30px'};
   box-sizing: border-box;
   background-color: white;
   border-radius: 5px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  min-height: 600px;
 `
 
-
 export class ContractLayout extends React.Component {
-
-
   render() {
     const {children} = this.props
 
     return (
       <Contract>
         <Logo to='/' />
-        <Field>
+        <Field nopadding={this.props.nopadding}>
           {children}
         </Field>
       </Contract>
