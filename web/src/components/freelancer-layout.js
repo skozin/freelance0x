@@ -41,13 +41,6 @@ const Field = styled.div`
 
 export class ContractLayout extends React.Component {
 
-  static mapStateToProps(state) {
-    return {
-      isCreatingProject: sel.isCreatingProject(state),
-      hasProject: sel.hasProject(state),
-    }
-  }
-
   render() {
     const {children} = this.props
 
@@ -55,7 +48,7 @@ export class ContractLayout extends React.Component {
       <Contract>
         <Logo to='/' />
         <Field>
-          {children}    
+          {children}
         </Field>
       </Contract>
     )
