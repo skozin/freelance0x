@@ -149,33 +149,34 @@ export default class ProjectContract {
   }
 
   start() {
-    return this._invokeInstanceFunction('start', 100000)
+    return this._invokeInstanceFunction('start', 4000000, '25000000000000000000')
   }
 
   setBillableTime(timeMinutes, comment) {
-    return this._invokeInstanceFunction('setBillableTime', 100000, [timeMinutes, comment])
+    return this._invokeInstanceFunction('setBillableTime', 4000000, 0, [timeMinutes, comment])
   }
 
   approve() {
-    return this._invokeInstanceFunction('approve', 100000)
+    return this._invokeInstanceFunction('approve', 4000000)
   }
 
   cancel() {
-    return this._invokeInstanceFunction('cancel', 100000)
+    return this._invokeInstanceFunction('cancel', 4000000, 0)
   }
 
   withdraw() {
-    return this._invokeInstanceFunction('withdraw', 100000)
+    return this._invokeInstanceFunction('withdraw', 4000000, 0)
   }
 
   leaveFeedback(positive, comment) {
-    return this._invokeInstanceFunction('leaveFeedback', 100000, [positive, comment])
+    return this._invokeInstanceFunction('leaveFeedback', 4000000, 0, [positive, comment])
   }
 
-  async _invokeInstanceFunction(name, gas, args = []) {
+  async _invokeInstanceFunction(name, gas, value, args = []) {
     await assertTxSucceeds(this.instance[name](...args, {
       from: this.account,
       gas: gas,
+      value: value,
     }))
     await this.fetch()
   }

@@ -68,7 +68,7 @@ contract Project {
   }
 
   function start() external payable onlyClient onlyAtState(State.Created) {
-    require(this.balance >= hourlyRate * timeCapMinutes);
+    // require(this.balance >= (hourlyRate * timeCapMinutes) / 60);
     state = State.Active;
     executionDate = now;
     lastActivityDate = now;
@@ -126,7 +126,7 @@ contract Project {
   }
 
   function setBillableTime(uint32 timeMinutes, string comment)
-    onlyClient onlyAtState(State.Active)
+    onlyContractor onlyAtState(State.Active)
   external {
     minutesReported = timeMinutes;
     contractorComment = comment;
@@ -137,7 +137,7 @@ contract Project {
     state = State.Approved;
     endDate = now;
     lastActivityDate = now;
-    withdraw();
+    // withdraw();
   }
 
   function cancel() onlyClient onlyAtState(State.Active) external {

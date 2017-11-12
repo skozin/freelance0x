@@ -100,6 +100,55 @@ export function startContract(address) {
   }
 }
 
+setBillableTime.type = 'SET_BILLABLE_TIME'
+
+export function setBillableTime(address, hours, comment) {
+  return {
+    type: setBillableTime.type,
+    address,
+    hours,
+    comment,
+  }
+}
+
+approve.type = 'APPROVE'
+
+export function approve(address) {
+  return {
+    type: approve.type,
+    address,
+  }
+}
+
+withdraw.type = 'WITHDRAW'
+
+export function withdraw(address) {
+  return {
+    type: withdraw.type,
+    address,
+  }
+}
+
+cancel.type = 'CANCEL'
+
+export function cancel(address) {
+  return {
+    type: cancel.type,
+    address,
+  }
+}
+
+leaveFeedback.type = 'LEAVE_FEEDBACK'
+
+export function leaveFeedback(address, positive, comment) {
+  return {
+    type: leaveFeedback.type,
+    address,
+    positive,
+    comment,
+  }
+}
+
 ////
 
 

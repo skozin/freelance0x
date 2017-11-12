@@ -52,7 +52,7 @@ class ContractContainer extends React.Component {
     return (
       <ContractLayout>
         <ContractHeader {...this.props} />
-        <ContractProgress {...this.props} />
+        {state !== 0 && <ContractProgress {...this.props} />}
         <ContractFooter {...this.props} />
       </ContractLayout>
     )
