@@ -157,7 +157,7 @@ const PaymentOverlay = styled.div`
   background-color: #5E69D7;
   width: 446px;
   position: absolute;
-  top: 29px;
+  top: 31px;
   left: 182px;
   border-radius: 2px;
   cursor: pointer;
