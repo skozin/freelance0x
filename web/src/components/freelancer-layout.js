@@ -39,8 +39,7 @@ const Field = styled.div`
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 `
 
-
-export class NewContract extends React.Component {
+export class ContractLayout extends React.Component {
 
   static mapStateToProps(state) {
     return {
@@ -81,4 +80,4 @@ export class NewContract extends React.Component {
 
 }
 
-export default connect(NewContract)
+export default connect(ContractLayout)
