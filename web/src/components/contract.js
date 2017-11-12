@@ -32,7 +32,7 @@ const Separator = styled.div`
     margin-top: 24px;
     margin-bottom: 32px;
 
-    letter-spacing: 0.76px; 
+    letter-spacing: 0.76px;
 `
 
 const FormDescription = styled.div`
@@ -55,10 +55,10 @@ const Contractor = styled.div`
 
   span {
     display: block;
-    margin-top: 8px;    
+    margin-top: 8px;
     font-family: 'Proxima Nova';
     font-weight: 100;
-    
+
   }
 
 `
@@ -99,7 +99,7 @@ const Prepayment = styled.div`
       font-family: 'Proxima Nova';
       font-weight: normal;
       display: block;
-      margin-top: 8px;    
+      margin-top: 8px;
     }
 `
 
@@ -114,7 +114,7 @@ const Total = styled.div`
         font-family: 'Proxima Nova';
         font-weight: normal;
         display: block;
-        margin-top: 8px;    
+        margin-top: 8px;
       }
 `
 
@@ -152,21 +152,13 @@ const Inner = styled.div`
 
 
 
-export class NewContract extends React.Component {
-
-  static mapStateToProps(state) {
-    return {
-      role: "client",
-    }
-  }
-
+export default class ContractDetails extends React.Component {
   renderFooter() {
-    console.log(this.props)
     if (this.props.role === 'contractor') {
       return <NewContractBtn onClick={this.createProject}>Pay</NewContractBtn>
-      
+
     } if (this.props.role === 'client') {
-      return <Footer>Please, wait for client payment.</Footer>      
+      return <Footer>Please, wait for client payment.</Footer>
     } else {
       return null
     }
@@ -174,10 +166,13 @@ export class NewContract extends React.Component {
   }
 
   render() {
+    const { name, state, clientAddress,
+           contractorAddress, hourlyRate, timeCapMinutes,
+           prepayFraction, minutesReported} = this.props
     return (
       <ContractLayout>
           <Inner>
-            <Header>The Greatest Contract in the World
+            <Header>{name}
               <Status />
             </Header>
             <Separator/>
@@ -185,39 +180,33 @@ export class NewContract extends React.Component {
               <Wallets>
                 <Contractor>
                   CONTRACTOR ADDRESS
-                  <span>0x00b3a4e828d0d8bc873dcd33fdcebb7ed2e6edb5</span>
+                  <span>{contractorAddress}</span>
                 </Contractor>
                 <Contractor>
                   CLIENT ADDRESS
-                  <span>0xfe2e794e7151690f3809aa76e553ecd581f858a3</span>
+                  <span>{clientAddress}</span>
                 </Contractor>
               </Wallets>
               <Payment>
                 <Rate>
                   HOURLY RATE
-                  <span>Ξ 0.912381123</span>
+                  <span>Ξ {Number(hourlyRate) / Math.pow(10, 18)}</span>
                 </Rate>
                 <Prepayment>
                   PREPAYMENT
-                  <span>35%</span>
+                  <span>{`${Number(prepayFraction) * 100}`}%</span>
                 </Prepayment>
               </Payment>
               <Total>
                 TOTAL
-                <span>Ξ 10</span>
+                <span>Ξ {Number(hourlyRate) / Math.pow(10, 18) * (Number(timeCapMinutes) / 60)}</span>
             </Total>
             </FormDescription>
           </Inner>
                 {
                   this.renderFooter()
-                } 
+                }
       </ContractLayout>
     )
   }
-
-  createProject = () => {
-    // todo
-  }
 }
-
-export default connect(NewContract)
