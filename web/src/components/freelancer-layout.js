@@ -44,7 +44,6 @@ const Field = styled.div`
 
 
 export class ContractLayout extends React.Component {
-
   render() {
     const {children} = this.props
 
