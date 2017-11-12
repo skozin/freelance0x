@@ -8,7 +8,7 @@ export default class ContractFooter extends React.Component {
     if (this.props.role === 'client') {
       return (
         <NewContractBtn onClick={() => this.props.actions.startContract(this.props.address)}>
-          Pay
+          Join and hold payment
         </NewContractBtn>
       )
     }

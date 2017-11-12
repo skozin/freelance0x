@@ -42,11 +42,11 @@ export default class ContractHeader extends React.Component {
             </Rate>
             <Prepayment>
               PREPAYMENT
-                <span>{`${Number(prepayFraction) / 10}`}%</span>
+                <span>{`${Math.floor(Number(prepayFraction) * 100)}`}%</span>
             </Prepayment>
           </Payment>
           <Total>
-            TOTAL
+            PRICE CAP
               <span><ETHIcon>Ξ</ETHIcon> {Number(hourlyRate) / Math.pow(10, 18) * (Number(timeCapMinutes) / 60)}</span>
           </Total>
         </FormDescription>

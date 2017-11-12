@@ -144,12 +144,12 @@ export class NewContract extends React.Component {
             <Paragraph>Please, set contract details.</Paragraph>
           </FormDescription>
           <InputsContainer>
-            <ClientAddress id='clientAddress' innerRef={node => this.clientAddressInput = node} placeholder='Client Address' defaultValue='0xf17f52151ebef6c7334fad080c5704d77216b732' />
-            <ContractName id='contractName' innerRef={node => this.contractNameInput = node} placeholder='Contract Name' defaultValue='Haba haba' />
+            <ClientAddress id='clientAddress' innerRef={node => this.clientAddressInput = node} placeholder='Client Address' />
+            <ContractName id='contractName' innerRef={node => this.contractNameInput = node} placeholder='Contract Name' />
           </InputsContainer>
           <InputsContainer>
-            <HourlyRate id='hourlyRate' innerRef={node => this.hourlyRateInput = node} placeholder='Hourly Rate' defaultValue='1' />
-            <HoursHardCap id='hoursHardCap' innerRef={node => this.hoursHardCapInput = node} placeholder='Hours Hard Cap' defaultValue='100' />
+            <HourlyRate id='hourlyRate' innerRef={node => this.hourlyRateInput = node} placeholder='Hourly Rate' />
+            <HoursHardCap id='hoursHardCap' innerRef={node => this.hoursHardCapInput = node} placeholder='Hours Hard Cap' />
           </InputsContainer>
           <InputsContainer>
             <PrepaymentCurrentValue id='paymentVal' disabled/>
