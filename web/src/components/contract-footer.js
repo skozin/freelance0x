@@ -3,47 +3,25 @@ import styled from 'styled-components'
 
 import Button from './Button'
 
-const StateOneMessage = styled.div`
-  font-family: 'Proxima Nova';
-  font-weight: normal;
-  margin-top: 60px;
-`
-
-const NewContractBtn = styled.a`
-  display: block;
-  width: 100%;
-  align-self: flex-end;
-  padding: 16px;
-  margin-top: 60px;
-  border: 1px solid;
-  border-radius: 2px;
-  cursor: pointer;
-  box-sizing: border-box;
-  text-align: center;
-  background-color: #5E69D7;
-  color: white;
-  text-transform: uppercase;
-  border-radius: 5px;
-
-  &:hover {
-    background-color: #5964CC;
-  }
-
-  &:active {
-    background-color: #5660C4;
-  }
-`
-
 export default class ContractFooter extends React.Component {
   renderPendingFooter () {
     if (this.props.role === 'client') {
-      return <NewContractBtn onClick={this.createProject}>Pay</NewContractBtn>
-
-    } if (this.props.role === 'contractor') {
-      return <StateOneMessage>Please, wait for client payment.</StateOneMessage>
-    } else {
-      return null
+      return (
+        <NewContractBtn onClick={() => this.props.actions2.startContract()}>
+          Pay
+        </NewContractBtn>
+      )
     }
+
+    if (this.props.role === 'contractor') {
+      return (
+        <StateOneMessage>
+          Please, wait for client payment.
+        </StateOneMessage>
+      )
+    }
+
+    return null
   }
 
 
@@ -52,8 +30,8 @@ export default class ContractFooter extends React.Component {
       return (
         <Footer>
           <ButtonsWrapper>
-            <Button>APPROVE CONTRACT</Button>
-            <Button thin>CANCEL CONTRACT</Button>
+            <Button onClick={() => this.props.actions2.approve()}>APPROVE CONTRACT</Button>
+            <Button thin onClick={() => this.props.actions2.cancel()}>CANCEL CONTRACT</Button>
           </ButtonsWrapper>
         </Footer>
       )
@@ -67,10 +45,10 @@ export default class ContractFooter extends React.Component {
               <AvailableLabel>AVAILABLE</AvailableLabel>
               <AvailableText>
                 <span>Ξ</span>
-                0.912381123
+                {Number(this.props.availableForWithdraw) / Math.pow(10, 18)}
               </AvailableText>
             </Available>
-            <Button transparent>WITHDRAW</Button>
+            <Button transparent onClick={() => this.props.actions2.withdraw()}>WITHDRAW</Button>
           </ButtonsWrapper>
         </Footer>
       )
@@ -134,5 +112,37 @@ const AvailableText = styled.div`
   span {
     font-family: 'Arial';
     margin-right: 8px;
+  }
+`
+
+
+const StateOneMessage = styled.div`
+  font-family: 'Proxima Nova';
+  font-weight: normal;
+  margin-top: 60px;
+`
+
+const NewContractBtn = styled.a`
+  display: block;
+  width: 100%;
+  align-self: flex-end;
+  padding: 16px;
+  margin-top: 60px;
+  border: 1px solid;
+  border-radius: 2px;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-align: center;
+  background-color: #5E69D7;
+  color: white;
+  text-transform: uppercase;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: #5964CC;
+  }
+
+  &:active {
+    background-color: #5660C4;
   }
 `

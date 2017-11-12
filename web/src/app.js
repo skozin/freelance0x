@@ -9,7 +9,6 @@ import ContractLayout from './components/new-contract'
 import Contract from './components/contract'
 import ContractFeedback from './components/contract-feedback'
 import ContractList from './components/contract-list'
-import ActiveClientScreen from './components/active-client-screen'
 import ContractContainer from './components/contract-container-dummy'
 
 export default function App() {
@@ -21,7 +20,6 @@ export default function App() {
         <Route exact path='/contract' component={Contract} />
         <Route exact path='/feedback' component={ContractFeedback} />
         <Route exact path='/contract-list' component={ContractList} />
-        <Route exact path='/active-client-screen' component={ActiveClientScreen} />
         <Route exact path='/container' component={ContractContainer} />
       </Layout>
     </BrowserRouter>

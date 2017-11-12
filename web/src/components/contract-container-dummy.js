@@ -12,9 +12,6 @@ import ContractFooter from './contract-footer'
 
 import ContractFeedback from './contract-feedback'
 
-// Created: 0,
-//   Active: 1,
-//     Approved: 2,
 class ContractContainer extends React.Component {
 
   static mapStateToProps(state) {
@@ -31,19 +28,22 @@ class ContractContainer extends React.Component {
       comment: ` I’ve done with the following tasks:
         — Layout without any logic
         — Integration API to layout`,
-      available: String(Number(7.13455323) * Math.pow(10, 18)),
-      totalContractEth: String(Number(10) * Math.pow(10, 18)),
+      availableForWithdraw: String(Number(7.13455323) * Math.pow(10, 18)),
     }
 
     return {
       ...basicProps,
       actions2: {
-        pay: () => {
-          console.log('Paid!')
+        startContract: () => {
+          console.log('Contract started!')
         },
 
-        updateHours: (newMinutesReported, newComment) => {
-          console.log('Updated with: new minutes' + newMinutesReported + ' new comment ' + newComment)
+        setBillableTime: (newMinutesReported, newComment) => {
+          console.log('Updated with: new minutes ' + newMinutesReported + ', new comment ' + newComment)
+        },
+
+        approve: () => {
+          console.log('Approved!')
         },
 
         withdraw: () => {
@@ -54,7 +54,7 @@ class ContractContainer extends React.Component {
           console.log('Cancel!')
         },
 
-        submitFeedback: (isGood, comment) => {
+        leaveFeedback: (isGood, comment) => {
           console.log('Feedback: ' + isGood + ' Comment:' + comment)
         }
       }
