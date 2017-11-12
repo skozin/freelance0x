@@ -31,6 +31,7 @@ contract Project {
 
   uint256 public hourlyRate;
 
+  uint256 public lastActivityDate = now;
   uint256 public executionDate;
   uint256 public endDate;
 
@@ -52,6 +53,7 @@ contract Project {
   function start() external {
     state = State.Active;
     executionDate = now;
+    lastActivityDate = now;
   }
 
   function getRole() public view returns (Role) {
@@ -67,26 +69,31 @@ contract Project {
   function setBillableTime(uint32 timeMinutes, string comment) external {
     minutesReported = timeMinutes;
     contractorComment = comment;
+    lastActivityDate = now;
   }
 
   function approve() external {
     state = State.Approved;
     endDate = now;
+    lastActivityDate = now;
   }
 
   function cancel() external {
     state = State.Cancelled;
     endDate = now;
+    lastActivityDate = now;
   }
 
   function withdraw() external {
     if (this.balance > 0) {
       msg.sender.transfer(this.balance);
     }
+    lastActivityDate = now;
   }
 
   function leaveFeedback(bool positive, string comment) external {
     // TODO
+    lastActivityDate = now;
   }
 
 }

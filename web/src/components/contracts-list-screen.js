@@ -28,14 +28,14 @@ ContractsListScreen.mapStateToProps = (state) => {
 }
 
 export function ContractsListScreen({contracts}) {
-  const contractsEls = contracts.keySeq().map(address => {
-    const contract = contracts.get(address).toJS()
-    return (
+  const contractsEls = contracts.keySeq()
+    .map(address => contracts.get(address).toJS())
+    .sort((c1, c2) => c2.lastActivityDate - c1.lastActivityDate)
+    .map(contract => (
       <div key={contract.ephemeralAddress || contract.address}>
         <Link to={`/contract/${contract.address}`}>{contract.name}: {contract.state} ({contract.address})</Link>
       </div>
-    )
-  })
+    ))
   return (
     <ContractsScreenContainer>
       <NewContractLink to='/new'>New contract</NewContractLink>

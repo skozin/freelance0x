@@ -8,6 +8,7 @@ let sel = makeSelectors({
   connection: 'connection',
   isConnecting: ['connection', 'isConnecting'],
   isConnected: ['connection', 'isConnected'],
+  initialFetchComplete: 'initialFetchComplete',
   account: ['connection', 'account'],
   contracts: 'contracts',
 })

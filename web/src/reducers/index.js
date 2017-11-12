@@ -10,6 +10,7 @@ import contractsReducer from './contracts'
 const INITIAL_STATE = fromJS({
   connection: connectionReducer.INITIAL_STATE,
   contracts: contractsReducer.INITIAL_STATE,
+  initialFetchComplete: false,
 })
 
 
@@ -22,7 +23,11 @@ export default function rootReducer(state = INITIAL_STATE, action) {
   state = state.update('connection', wrapReducer(connectionReducer))
   state = state.update('contracts', wrapReducer(contractsReducer))
 
-  state = state.merge({router: newRouterState})
+  if (action.type == Actions.initialFetchCompleted.type) {
+    state = state.set('initialFetchComplete', true)
+  }
+
+  // state = state.merge({router: newRouterState})
   state.router = newRouterState
 
   return state

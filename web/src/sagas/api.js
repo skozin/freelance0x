@@ -1,6 +1,6 @@
 import {take, takeEvery, call, fork, select} from 'redux-saga/effects'
 import {push} from 'react-router-redux'
-import { delay } from 'redux-saga'
+import {delay} from 'redux-saga'
 import $dispatch from '~/utils/saga-dispatch'
 
 import * as Actions from '~/actions'
@@ -12,6 +12,7 @@ let contractsByAddress = {}
 
 export default function* $apiSaga() {
   yield fork($setAccount)
+  yield takeEvery(Actions.fetchContract.type, $handleFetchContract)
   yield takeEvery(Actions.createContract.type, $handleCreateContract)
   yield takeEvery(Actions.startContract.type, $handleStartContract)
 }
@@ -31,6 +32,26 @@ function* $setAccount() {
 }
 
 
+function* $handleFetchContract(action) {
+  let contract = contractsByAddress[action.address]
+  try {
+    if (contract) {
+      console.debug(`fetching contract ${contract.address}`)
+      yield call(contract.fetch)
+    } else {
+      console.debug(`obtaining contract ${action.address}`)
+      contract = yield call(ProjectContract.at, action.address)
+      contractsByAddress[contract.address] = contract
+    }
+  } catch (err) {
+    yield* $dispatch(Actions.contractOperationFailed(action.address, err.message, !contract))
+    // setTimeout(() => {throw err}, 0)
+    return
+  }
+  yield* $dispatchUpdateContract(contract, action.address)
+}
+
+
 function* $handleCreateContract(action) {
   yield* $dispatch(push(`/contract/${action.ephemeralAddress}`))
   let contract
@@ -43,8 +64,8 @@ function* $handleCreateContract(action) {
       action.prepayFractionThousands,
     )
   } catch (err) {
-    yield* $dispatch(Actions.contractCreationFailed(action.ephemeralAddress, err.message))
-    setTimeout(() => {throw err}, 0)
+    yield* $dispatch(Actions.contractOperationFailed(action.ephemeralAddress, err.message))
+    // setTimeout(() => {throw err}, 0)
     return
   }
   contractsByAddress[contract.address] = contract

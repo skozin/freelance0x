@@ -26,6 +26,8 @@ export async function getAccount() {
 
 
 export const State = {
+  NotFound: -3,
+  Fetching: -2,
   Creating: -1,
   Created: 0,
   Active: 1,
@@ -54,7 +56,7 @@ export default class ProjectContract {
 
   static async at(address) {
     const {web3, accounts, Project} = await apiPromise
-    const instance = await Project.at(address)
+    const instance = await Project.at(address).then(x => x)
     const contract = new ProjectContract(web3, accounts[0], instance)
     await contract.initialize()
     return contract
@@ -87,34 +89,37 @@ export default class ProjectContract {
     this.hourlyRate = new BigNumber('' + hourlyRate)
     this.timeCapMinutes = timeCapMinutes.toNumber()
     this.prepayFraction = prepayFractionThousands.toNumber() / 1000
-    this.myRole = myRole;
+    this.myRole = myRole.toNumber();
   }
 
   // Fetches mutable contract props.
   //
   async fetch() {
     const {instance} = this
-    const [state, executionDate, endDate, minutesReported, balance] = await Promise.all([
+    const [state, executionDate, endDate, minutesReported, lastActivityDate, balance] =
+      await Promise.all([
       instance.state(),
       instance.executionDate(),
       instance.endDate(),
       instance.minutesReported(),
+      instance.lastActivityDate(),
       this.web3.eth.getBalance(instance.address),
     ])
     this.state = state.toNumber()
     this.executionDate = executionDate.toNumber()
     this.endDate = endDate.toNumber()
     this.minutesReported = minutesReported.toNumber()
+    this.lastActivityDate = lastActivityDate.toNumber()
     this.balance = new BigNumber(balance)
   }
 
   serialize() {
     const {address, name, state, clientAddress, contractorAddress, executionDate, endDate,
       hourlyRate, timeCapMinutes, minutesReported, prepayFraction,
-      balance} = this
+      balance, myRole, lastActivityDate} = this
     return {address, name, state, clientAddress, contractorAddress, executionDate, endDate,
       hourlyRate, timeCapMinutes, minutesReported, prepayFraction,
-      balance
+      balance, myRole, lastActivityDate,
     }
   }
 

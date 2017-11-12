@@ -27,10 +27,18 @@ export function connected(address) {
 
 setContractsList.type = 'SET_CONTRACTS_LIST'
 
-export function setContractsList(contractsById) {
+export function setContractsList(contractsByAddress) {
   return {
     type: setContractsList.type,
-    contractsById,
+    contractsByAddress,
+  }
+}
+
+initialFetchCompleted.type = 'INITIAL_FETCH_COMPLETED'
+
+export function initialFetchCompleted() {
+  return {
+    type: initialFetchCompleted.type,
   }
 }
 
@@ -41,6 +49,16 @@ export function updateContract(contract, ephemeralAddress) {
     type: updateContract.type,
     contract,
     ephemeralAddress,
+  }
+}
+
+fetchContract.type = 'FETCH_CONTRACT'
+
+export function fetchContract(address) {
+  return {
+    type: fetchContract.type,
+    address,
+    now: now(),
   }
 }
 
@@ -58,16 +76,18 @@ export function createContract(
     timeCapMinutes,
     prepayFractionThousands,
     ephemeralAddress,
+    now: now(),
   }
 }
 
-contractCreationFailed.type = 'CONTRACT_CREATION_FAILED'
+contractOperationFailed.type = 'CONTRACT_OPERATION_FAILED'
 
-export function contractCreationFailed(ephemeralAddress, errorMessage) {
+export function contractOperationFailed(address, errorMessage, contractNotFound) {
   return {
-    type: contractCreationFailed.type,
-    ephemeralAddress,
+    type: contractOperationFailed.type,
+    address,
     errorMessage,
+    contractNotFound,
   }
 }
 
@@ -78,4 +98,11 @@ export function startContract(address) {
     type: startContract.type,
     address,
   }
+}
+
+////
+
+
+function now() {
+  return Math.floor(Date.now() / 1000)
 }
