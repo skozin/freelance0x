@@ -28,8 +28,8 @@ render(App)
 
 
 if (module.hot) {
-  module.hot.accept('~/app', () => {
-    const App = require('~/app').default
+  module.hot.accept('~/app-integration', () => {
+    const App = require('~/app-integration').default
     render(App)
   })
 }

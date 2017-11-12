@@ -36,9 +36,17 @@ export const State = {
 }
 
 
+export const Role = {
+  Stranger: 0,
+  Contractor: 1,
+  Client: 2,
+}
+
+
 export default class ProjectContract {
 
   static State = State
+  static Role = Role
 
   static async deploy(name, clientAddress, hourlyRate, timeCapMinutes, prepayFractionThousands) {
     const {web3, accounts, Project} = await apiPromise
@@ -96,13 +104,15 @@ export default class ProjectContract {
   //
   async fetch() {
     const {instance} = this
-    const [state, executionDate, endDate, minutesReported, lastActivityDate, balance] =
-      await Promise.all([
+    const [state, executionDate, endDate, minutesReported,
+      lastActivityDate, availableForWithdraw, balance] =
+    await Promise.all([
       instance.state(),
       instance.executionDate(),
       instance.endDate(),
       instance.minutesReported(),
       instance.lastActivityDate(),
+      instance.availableForWithdraw(),
       this.web3.eth.getBalance(instance.address),
     ])
     this.state = state.toNumber()
@@ -110,16 +120,17 @@ export default class ProjectContract {
     this.endDate = endDate.toNumber()
     this.minutesReported = minutesReported.toNumber()
     this.lastActivityDate = lastActivityDate.toNumber()
+    this.availableForWithdraw = new BigNumber(availableForWithdraw)
     this.balance = new BigNumber(balance)
   }
 
   serialize() {
     const {address, name, state, clientAddress, contractorAddress, executionDate, endDate,
       hourlyRate, timeCapMinutes, minutesReported, prepayFraction,
-      balance, myRole, lastActivityDate} = this
+      balance, myRole, lastActivityDate, availableForWithdraw,} = this
     return {address, name, state, clientAddress, contractorAddress, executionDate, endDate,
       hourlyRate, timeCapMinutes, minutesReported, prepayFraction,
-      balance, myRole, lastActivityDate,
+      balance, myRole, lastActivityDate, availableForWithdraw,
     }
   }
 

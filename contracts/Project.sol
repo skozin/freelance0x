@@ -66,6 +66,10 @@ contract Project {
     return Role.Stranger;
   }
 
+  function availableForWithdraw() public view returns (uint) {
+    return 42;
+  }
+
   function setBillableTime(uint32 timeMinutes, string comment) external {
     minutesReported = timeMinutes;
     contractorComment = comment;
