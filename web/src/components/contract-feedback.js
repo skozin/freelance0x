@@ -61,7 +61,7 @@ export default class ContractFeedback extends React.Component {
 
 		return (
 			<ContractFeedbackView>
-				<FormTitle>The greatest contract in the World</FormTitle>
+				<FormTitle>{this.props.name}</FormTitle>
 				<Separator />
 				<FormDescription>
 					<p>Please, give a feedback for {role === 'client' ? 'client' : 'contractor'}.</p>

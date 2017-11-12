@@ -41,7 +41,7 @@ export function ContractsListScreen({contracts}) {
           contracts.size < 1 ?
             <Empty>
               <span>😵</span>
-              No one contract here
+              No contracts yet!
             </Empty>
             :
             <ItemWrapper>

@@ -16,7 +16,7 @@ export default class ContractFooter extends React.Component {
     if (this.props.role === 'contractor') {
       return (
         <StateOneMessage>
-          Please, wait for client payment.
+          Please wait for the client to join this contract.
         </StateOneMessage>
       )
     }
