@@ -6,6 +6,7 @@ import connect from '~/utils/connect'
 import sel from '~/selectors'
 
 import plus_circle from '../../assets/plus_circle.svg'
+import empty_list from '../../assets/empty_list.svg'
 
 import ContractLayout from './freelancer-layout'
 
