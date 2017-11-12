@@ -10,7 +10,7 @@ import Contract from './components/contract'
 import ContractFeedback from './components/contract-feedback'
 import ContractList from './components/contract-list'
 import ActiveClientScreen from './components/active-client-screen'
-import ContractContainer from './components/contract-container'
+import ContractContainer from './components/contract-container-dummy'
 
 export default function App() {
   return (
