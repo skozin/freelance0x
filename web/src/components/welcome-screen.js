@@ -27,6 +27,7 @@ export default function WelcomeScreen() {
       <ParticipateLink to='/feedback'>Feedback</ParticipateLink>
       <ParticipateLink to='/contract-list'>Contract List</ParticipateLink>
       <ParticipateLink to='/active-client-screen'>Active Client Screen</ParticipateLink>
+      <ParticipateLink to='/container'>Tigran</ParticipateLink>
     </WelcomeScreenContainer>
   )
 }

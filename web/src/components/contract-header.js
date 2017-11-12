@@ -119,24 +119,15 @@ export default class ContractHeader extends React.Component {
       clientAddress,
       contractorAddress,
       hourlyRate,
-      minutesReported,
+      timeCapMinutes,
       prepayFraction,
-      timeCapMinutes
+      minutesReported
     } = this.props
-
-    name = 'The Greatest Contract in the World'
-    state = 'ACTIVE'
-    contractorAddress = '0x00b3a4e828d0d8bc873dcd33fdcebb7ed2e6edb5'
-    clientAddress = '0xfe2e794e7151690f3809aa76e553ecd581f858a3'
-    hourlyRate = '0.212381123'
-    minutesReported = '210'
-    prepayFraction = '0.35'
-    timeCapMinutes = '600'
 
     return (
       <Inner>
         <Header>{name}
-          <Status />
+          <Status status={state} />
         </Header>
         <Separator />
         <FormDescription>

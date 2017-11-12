@@ -48,10 +48,6 @@ const Circle = styled.div`
 export default class Status extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   status: props.status
-    // }
-    // console.log('props.status', props.status)
     console.log(this.props)
   }
   renderStatus () {

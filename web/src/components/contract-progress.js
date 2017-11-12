@@ -1,89 +1,108 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import ContractLayout from './freelancer-layout'
-import ContractDetails from './contract-header'
 import Button from './Button'
 
-export default class ActiveClientScreen extends React.Component {
+export default class ContractProgress extends React.Component {
+  state = {
+    isEditing: false
+  }
+
+  onEditClick = () => {
+    this.setState({
+      isEditing: true
+    })
+  }
+
+  onUpdateClick = () => {
+    this.setState({
+      isEditing: false
+    })
+
+    this.props.actions2.updateHours()
+  }
+
+  onCancelClick = () => {
+    this.setState({
+      isEditing: false
+    })
+  }
+
   render () {
+    const {
+      role,
+      state,
+      name,
+      clientAddress,
+      contractorAddress,
+      hourlyRate,
+      timeCapMinutes,
+      prepayFraction,
+      minutesReported,
+      comment,
+      available,
+      totalContractEth,
+    } = this.props
+    const { isEditing } = this.state
+
     return (
-      <ContractLayout>
-        <ContractDetails />
-        <Progress>
-          <ProgressTitle>Current Progress</ProgressTitle>
-          <Bar>
-            <BarHead>
-              <BarLabel>TIME SPENT</BarLabel>
-              <BarHours>3.5 / 10 hours</BarHours>
-            </BarHead>
-            <BarLine>
-              <BarLineInner hardCap={10} trackedHours={3.5}/>
-            </BarLine>
-          </Bar>
-          <Comment>
-            <CommentTitle>COMMENT</CommentTitle>
-            <CommentText>
-              {
-                `I’ve done with the following tasks:
-                — Layout without any logic
-                — Integration API to layout
-                `
-              }
-            </CommentText>
-          </Comment>
-          {/* <Editing>
-            <Comment>
-              <CommentTitle>COMMENT</CommentTitle>
-              <CommentTextarea>
-                {
-                  `I’ve done with the following tasks:
-                  — Layout without any logic
-                  — Integration API to layout
-                `
-                }
-              </CommentTextarea>
-            </Comment>
-            <BarEditing>
-              <BarLabel>TIME SPENT</BarLabel>
-              <BarHoursEditing>
-                <BarInput type="number" placeholder="3" />
-                <span>/</span>
-                10 hours
-              </BarHoursEditing>
-            </BarEditing>
-          </Editing> */}
-        </Progress>
-        <Footer>
-          <ButtonsWrapper>
-            <Button>APPROVE CONTRACT</Button>
-            <Button thin>CANCEL CONTRACT</Button>
-          </ButtonsWrapper>
-        </Footer>
-
-        {/* <Footer>
-          <ButtonsWrapper>
-            <Button>EDIT</Button>
-          </ButtonsWrapper>
-          <ButtonsWrapper>
-            <Available>
-              <AvailableLabel>AVAILABLE</AvailableLabel>
-              <AvailableText>
-                <span>Ξ</span>
-                0.912381123
-              </AvailableText>
-            </Available>
-            <Button transparent>WITHDRAW</Button>
-          </ButtonsWrapper>
-        </Footer> */}
-
-        {/* <Footer>
-          <ButtonsWrapper>
-            <Button>UPDATE</Button>
-            <Button thin>CANCEL EDITING</Button>
-          </ButtonsWrapper>
-        </Footer> */}
-      </ContractLayout>
+      <Progress>
+        <ProgressTitle>Current Progress</ProgressTitle>
+        {
+          isEditing ?
+            <IsEditing>
+              <Editing>
+                <Comment>
+                  <CommentTitle>COMMENT</CommentTitle>
+                  <CommentTextarea>
+                    { comment }
+                  </CommentTextarea>
+                </Comment>
+                <BarEditing>
+                  <BarLabel>TIME SPENT</BarLabel>
+                  <BarHoursEditing>
+                    <BarInput
+                      ref="minutes"
+                      type="number"
+                      placeholder="3"
+                      value={Number(minutesReported) / 60} />
+                    <span>/</span>
+                    {timeCapMinutes} hours
+                  </BarHoursEditing>
+                </BarEditing>
+              </Editing>
+              <Footer>
+                <ButtonsWrapper>
+                  <Button onClick={() => this.onUpdateClick()}>UPDATE</Button>
+                  <Button onClick={() => this.onCancelClick()} thin>CANCEL EDITING</Button>
+                </ButtonsWrapper>
+              </Footer>
+            </IsEditing>
+            :
+            <IsNotEditing>
+              <Bar>
+                <BarHead>
+                  <BarLabel>TIME SPENT</BarLabel>
+                  <BarHours>{Number(minutesReported) / 60} / { Number(timeCapMinutes) / 60} hours</BarHours>
+                </BarHead>
+                <BarLine>
+                  <BarLineInner timeCapMinutes={timeCapMinutes} minutesReported={minutesReported} />
+                </BarLine>
+              </Bar>
+              <Comment>
+                <CommentTitle>COMMENT</CommentTitle>
+                <CommentText>
+                  { comment }
+                </CommentText>
+              </Comment>
+              <Footer>
+                <ButtonsWrapper>
+                  <Button onClick={() => this.onEditClick()}>EDIT</Button>
+                </ButtonsWrapper>
+              </Footer>
+            </IsNotEditing>
+        }
+      </Progress>
     )
   }
 }
@@ -201,7 +220,7 @@ const BarLine = styled.div`
 
 const BarLineInner = styled.div`
   background: #5E69D7;
-  width: ${props => (props.trackedHours / props.hardCap) * 100 + '%'};
+  width: ${props => (Number(props.minutesReported) / Number(props.timeCapMinutes)) * 100 + '%'};
   height: 100%;
   position: absolute;
   top: 0;
@@ -267,6 +286,7 @@ const ButtonsWrapper = styled.div`
 `
 
 const Footer = styled.div`
+  margin-top: 32px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -301,4 +321,12 @@ const AvailableText = styled.div`
 const Editing = styled.div`
   display: flex;
   flex-flow: row nowrap;
+`
+
+const IsEditing = styled.div`
+
+`
+
+const IsNotEditing = styled.div`
+
 `

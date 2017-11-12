@@ -27,6 +27,17 @@ const ButtonView = styled.div`
     background: ${props => props.transparent ? 'transparent' : '#5E69D7'};
     border-radius: 3px;
     min-width: ${props => props.transparent ? '149px' : '194px'};
+
+    transition: background 0.2s;
+    will-change: background;
+
+    &:hover {
+      background-color: #5964CC;
+    }
+
+    &:active {
+      background-color: #5660C4;
+    }
   `}
 
   ${props => props.transparent && css`
