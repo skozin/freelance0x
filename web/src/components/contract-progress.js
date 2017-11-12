@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import Button from './Button'
 
@@ -71,7 +71,7 @@ export default class ContractProgress extends React.Component {
                   </BarHoursEditing>
                 </BarEditing>
               </Editing>
-              <Footer>
+              <Footer isEditing>
                 <ButtonsWrapper>
                   <Button onClick={() => this.onUpdateClick(this.hours.value, this.comment.value)}>
                     UPDATE
@@ -190,7 +190,8 @@ const BarHoursEditing = styled.div`
 
 const BarInput = styled.input`
   margin-right: 12px;
-  padding: 14px 16px 15px;
+  padding: 14px 12px 15px;
+  width: 100%;
   max-width: 54px;
   border-radius: 3px;
   resize: none;
@@ -298,6 +299,13 @@ const Footer = styled.div`
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
+
+  ${props => props.isEditing && css`
+    margin-top: 35px;
+    z-index: 5;
+    background: #FFF;
+    position: relative;
+  `}
 `
 
 const Available = styled.div`

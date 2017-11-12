@@ -49,10 +49,8 @@ const Contractor = styled.div`
     display: block;
     margin-top: 8px;
     font-family: 'Proxima Nova';
-    font-weight: 100;
-
+    font-weight: 400;
   }
-
 `
 
 const InputsContainer = styled.div`
@@ -73,10 +71,19 @@ const Rate = styled.div`
   font-size: 16px;
 
   span {
-    display: block;
+    font-weight: 400;
     font-family: 'Proxima Nova';
     margin-top: 8px;
+
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
   }
+`
+
+const ETHIcon = styled.div`
+  font-family: 'Arial';
+  margin-right: 8px;
 `
 
 const Prepayment = styled.div`
@@ -87,7 +94,7 @@ const Prepayment = styled.div`
 
   span {
     font-family: 'Proxima Nova';
-    font-weight: normal;
+    font-weight: 400;
     display: block;
     margin-top: 8px;
   }
@@ -101,9 +108,13 @@ const Total = styled.div`
 
   span {
     font-family: 'Proxima Nova';
-    font-weight: normal;
+    font-weight: 400;
     display: block;
     margin-top: 8px;
+
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
   }
 `
 
@@ -134,17 +145,20 @@ export default class ContractHeader extends React.Component {
           <Wallets>
             <Contractor>
               CONTRACTOR ADDRESS
-                <span>{contractorAddress}</span>
+              <span>{contractorAddress}</span>
             </Contractor>
             <Contractor>
               CLIENT ADDRESS
-                <span>{clientAddress}</span>
+              <span>{clientAddress}</span>
             </Contractor>
           </Wallets>
           <Payment>
             <Rate>
               HOURLY RATE
-                <span>Ξ {Number(hourlyRate) / Math.pow(10, 18)}</span>
+              <span>
+                <ETHIcon>Ξ</ETHIcon>
+                {Number(hourlyRate) / Math.pow(10, 18)}
+              </span>
             </Rate>
             <Prepayment>
               PREPAYMENT
@@ -153,7 +167,7 @@ export default class ContractHeader extends React.Component {
           </Payment>
           <Total>
             TOTAL
-              <span>Ξ {Number(hourlyRate) / Math.pow(10, 18) * (Number(timeCapMinutes) / 60)}</span>
+              <span><ETHIcon>Ξ</ETHIcon> {Number(hourlyRate) / Math.pow(10, 18) * (Number(timeCapMinutes) / 60)}</span>
           </Total>
         </FormDescription>
       </Inner>

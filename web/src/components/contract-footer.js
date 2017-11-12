@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import Button from './Button'
 
@@ -39,8 +39,8 @@ export default class ContractFooter extends React.Component {
 
     if (this.props.role === 'contractor') {
       return (
-        <Footer>
-          <ButtonsWrapper>
+        <Footer absolute>
+          <ButtonsWrapper absolute>
             <Available>
               <AvailableLabel>AVAILABLE</AvailableLabel>
               <AvailableText>
@@ -54,7 +54,6 @@ export default class ContractFooter extends React.Component {
       )
     }
   }
-
 
   render () {
     const { role, state } = this.props
@@ -80,14 +79,25 @@ const ButtonsWrapper = styled.div`
   & > div:nth-child(2) {
     margin-left: 16px;
   }
+
+  ${props => props.absolute && css`
+    position: absolute;
+    right: 0;
+    bottom: 100%;
+  `}
 `
 
 const Footer = styled.div`
+  position: relative;
   margin-top: 32px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
+
+  ${props => props.absolute && css`
+    margin-top: 0;
+  `}
 `
 
 const Available = styled.div`
@@ -114,7 +124,6 @@ const AvailableText = styled.div`
     margin-right: 8px;
   }
 `
-
 
 const StateOneMessage = styled.div`
   font-family: 'Proxima Nova';
