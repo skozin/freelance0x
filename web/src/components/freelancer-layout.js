@@ -14,6 +14,7 @@ const Contract = styled.div`
   justify-content: center;
   padding: 0 40px;
   background: url(${background}) no-repeat center / cover;
+  color: #242738;
 `
 
 const Logo = styled(Link)`
@@ -29,6 +30,7 @@ const Field = styled.div`
   font-family: 'Proxima Nova';
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 700px;
   height: 600px;
   margin: 100px 0;
@@ -39,7 +41,9 @@ const Field = styled.div`
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 `
 
+
 export class ContractLayout extends React.Component {
+
 
   render() {
     const {children} = this.props
