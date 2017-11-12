@@ -62,8 +62,7 @@ class ContractContainer extends React.Component {
 export default connect(ContractContainer)
 
 const SpinnerWrapper = styled.div`
-  height: 700px;
-  width: 100%;
+  height: 480px;
 
   display: flex;
   align-items: center;
@@ -71,7 +70,7 @@ const SpinnerWrapper = styled.div`
 `
 
 const ErrorMessage = styled.div`
-  height: 700px;
+  height: 480px;
   font-family: 'Muller';
   font-weight: 500;
   font-size: 26px;

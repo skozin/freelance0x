@@ -9,7 +9,8 @@ import Button from './Button'
 export default class ContractFeedback extends React.Component {
 	state = {
 		good: true,
-		bad: false
+		bad: false,
+		isFeedbackSended: false
 	}
 
 	onWithdrawClick = () => {
@@ -34,34 +35,51 @@ export default class ContractFeedback extends React.Component {
 
 	sendFeedback = () => {
 		this.props.actions.leaveFeedback(this.props.address, !this.state.bad, this.messageText.value)
+		this.setState({
+			isFeedbackSended: true
+		})
 	}
 
 	render () {
 		const { availableForWithdraw, role } = this.props
+		const { isFeedbackSended } = this.state
+
+		if (isFeedbackSended) {
+			return (
+				<ContractFeedbackView>
+					<FeedbackSended>
+						<Emoji>👍</Emoji>
+						<FeedbackText>Thank you for the feedback</FeedbackText>
+					</FeedbackSended>
+				</ContractFeedbackView>
+			)
+		}
 
 		return (
 			<ContractFeedbackView>
-      	<FormTitle>The greatest contract in the World</FormTitle>
-      	<Separator/>
-      	<FormDescription>
+				<FormTitle>The greatest contract in the World</FormTitle>
+				<Separator />
+				<FormDescription>
 					<p>Please, give a feedback for {role === 'client' ? 'client' : 'contractor'}.</p>
-        </FormDescription>
-      	<FeedbackOptions>
+				</FormDescription>
+				<FeedbackOptions>
 					<GoodEmojiContainer
 						data='good'
 						onClick={((e) => this.chooseFeedbackType(e))}
 						chosen={this.state.good} />
-      		or
+					or
 					<BadEmojiContainer
 						data='bad'
 						onClick={((e) => this.chooseFeedbackType(e))}
 						chosen={this.state.bad} />
-      	</FeedbackOptions>
+				</FeedbackOptions>
 				<Message>
 					<MessageLabel>message</MessageLabel>
-					<MessageTextArea innerRef={node => this.messageText = node}/>
+					<MessageTextArea
+						placeholder="Contractor is a talented young front end developer and i enjoy working with him. With a little more time, he will become a strong all round web developer and designer. I will definitely continue to work together in future."
+						innerRef={node => this.messageText = node} />
 				</Message>
-      	<FormBtn onClick={() => this.sendFeedback()}>Leave a Feedback</FormBtn>
+				<FormBtn onClick={() => this.sendFeedback()}>Leave a Feedback</FormBtn>
 
 				<Footer>
 					<ButtonsWrapper>
@@ -70,7 +88,7 @@ export default class ContractFeedback extends React.Component {
 							<AvailableText>
 								<span>Ξ</span>
 								{Number(availableForWithdraw) / Math.pow(10, 18)}
-              </AvailableText>
+							</AvailableText>
 						</Available>
 						<Button transparent onClick={() => this.onWithdrawClick()}>WITHDRAW</Button>
 					</ButtonsWrapper>
@@ -80,11 +98,33 @@ export default class ContractFeedback extends React.Component {
 	}
 }
 
+const FeedbackSended = styled.div`
+	flex: 1;
+	display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+`
+
+const Emoji = styled.div`
+	font-family: 'Apple Color Emoji';
+	font-size: 64px;
+	margin-bottom: 24px;
+`
+
+const FeedbackText = styled.div`
+	font-family: 'Proxima Nova';
+  font-size: 28px;
+  color: #242737;
+  letter-spacing: -0.85px;
+`
+
 const ContractFeedbackView = styled.div`
 	display: flex;
 	flex-flow: column nowrap;
 	justify-content: center;
 	align-items: center;
+	flex: 1;
 `
 
 const FormTitle = styled.h2`
@@ -166,10 +206,15 @@ const MessageTextArea = styled.textarea`
   padding: 12px;
   width: 100%;
   box-sizing: border-box;
-  font-size: 14px;
   border-radius: 3px;
   border: 1px solid #cccccc;
 	resize: none;
+
+	font-family: 'Proxima Nova';
+	font-size: 16px;
+	color: #242737;
+	letter-spacing: -0.48px;
+	line-height: 22px;
 
   &:focus {
     outline: none;
@@ -194,7 +239,7 @@ const GoodEmojiContainer = styled.div`
 	}
 
 	cursor: pointer;
-	opacity: ${props => props.chosen ? '1' : '0.6'};
+	opacity: ${props => props.chosen ? '1' : '0.3'};
 	transition: opacity 0.2s;
 `
 const BadEmojiContainer = styled.div`
@@ -202,12 +247,12 @@ const BadEmojiContainer = styled.div`
 	height: 64px;
 	background: url(${bad_feedback}) no-repeat center / contain;
 	margin-left: 20px;
-	opacity: 0.6;
+	opacity: 0.3;
 	&:hover {
 		opacity: 1;
 	}
 	cursor: pointer;
-	opacity: ${props => props.chosen ? '1' : '0.6'};
+	opacity: ${props => props.chosen ? '1' : '0.3'};
 	transition: opacity 0.2s;
 `
 

@@ -6,36 +6,10 @@ import connect from '~/utils/connect'
 import sel from '~/selectors'
 
 import plus_circle from '../../assets/plus_circle.svg'
-import empty_list from '../../assets/empty_list.svg'
+import empty from '../../assets/empty_list.svg'
 
 import ContractLayout from './freelancer-layout'
 import ContractItem from './contract-item'
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 60px 30px 50px 30px;
-`
-const FormTitle = styled.h2`
-  color: #242737;
-  font-size: 36px;
-`
-const NewContract = styled(Link)`
-  text-decoration: none;
-  color: black;
-  &:before {
-    content: url(${plus_circle});
-    vertical-align: -25%;
-    padding-right: 5px;
-  }
-`
-
-const ItemWrapper = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  height: 100%;
-`
 
 ContractsListScreen.mapStateToProps = (state) => {
   return {
@@ -63,15 +37,72 @@ export function ContractsListScreen({contracts}) {
         <FormTitle>Contract List</FormTitle>
         <NewContract to='/new'>New Contract</NewContract>
       </Header>
-        <ItemWrapper>
-        {contractsEls}
-        </ItemWrapper>
+        {
+          contracts.size < 1 ?
+            <Empty>
+              <span>😵</span>
+              No one contract here
+            </Empty>
+            :
+            <ItemWrapper>
+              {contractsEls}
+            </ItemWrapper>
+        }
     </ContractLayout>
   )
 }
 
-//<div key={contract.ephemeralAddress || contract.address}>
-  //<Link to={`/contract/${contract.address}`}>{contract.name}: {contract.state} ({contract.address})</Link>
-//</div>
-
 export default connect(ContractsListScreen)
+
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 60px 30px 50px 30px;
+`
+const FormTitle = styled.h2`
+  font-family: 'Muller';
+  font-weight: 500;
+  font-size: 28px;
+  color: #242737;
+  letter-spacing: -0.85px;
+`
+const NewContract = styled(Link)`
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+
+  &:before {
+    content: url(${plus_circle});
+    vertical-align: -25%;
+    padding-right: 8px;
+  }
+`
+
+const ItemWrapper = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100%;
+  flex: 1;
+`
+
+const Empty = styled.div`
+  margin-bottom: 100px;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+
+  font-family: 'Proxima Nova';
+  font-size: 28px;
+  color: #242737;
+  letter-spacing: -0.85px;
+
+  span {
+    font-family: 'Apple Color Emoji';
+    font-size: 64px;
+    margin-bottom: 24px;
+  }
+`

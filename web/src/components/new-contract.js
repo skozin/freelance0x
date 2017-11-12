@@ -13,6 +13,13 @@ const NewContractScreen = styled.div`
   padding: 0 40px;
 `
 
+const Inner = styled.div`
+  flex: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+`
+
 const NewContractForm = styled.form`
   font-family: 'Proxima Nova';
   display: flex;
@@ -31,30 +38,56 @@ const NewContractBtn = styled.a`
   display: block;
   width: 100%;
   align-self: flex-end;
-  padding: 16px;
+  padding: 16px 16px 14px;
   margin-top: 20px;
-  border: 1px solid;
-  border-radius: 2px;
   cursor: pointer;
   box-sizing: border-box;
   text-align: center;
   background-color: #5E69D7;
   color: white;
   text-transform: uppercase;
-  border-radius: 5px;
+  border-radius: 3px;
+
+  font-family: 'Muller';
+  font-weight: bold;
+  font-size: 16px;
+  color: #FFFFFF;
+  letter-spacing: -0.48px;
+
+  transition: background-color 0.2s ease;
+
   &:hover {
     background-color: #5964CC;
   }
+
   &:active {
     background-color: #5660C4;
   }
 `
 
 const FormTitle = styled.h2`
-  color: #242737;
-  font-size: 36px;
-  margin-bottom: 28px;
+  margin-bottom: 16px;
   align-self: center;
+
+  font-family: 'Muller';
+  font-weight: 500;
+  font-size: 36px;
+  color: #242737;
+  letter-spacing: -0.38px;
+
+  position: relative;
+  padding-bottom: 16px;
+
+  &:after {
+    content: '';
+    height: 2px;
+    width: 70px;
+    background: #5E69D7;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+  }
 `
 
 const FormDescription = styled.div`
@@ -73,7 +106,7 @@ const Paragraph = styled.p`
 
 const InputsContainer = styled.div`
   display: flex;
-  jusstify-content: space-between;
+  justify-content: center;
   position: relative;
 `
 
@@ -87,6 +120,13 @@ const Input = styled.input`
   border-radius: 5px;
   border: 1px solid #cccccc;
   color: #242737;
+
+  font-family: 'Proxima Nova';
+  font-size: 16px;
+  color: #242737;
+  letter-spacing: -0.48px;
+  line-height: 22px;
+
   &:focus {
     outline: none;
     border-color: #5E69D7;
@@ -138,7 +178,7 @@ export class NewContract extends React.Component {
   render() {
     return (
       <ContractLayout>
-
+        <Inner>
           <FormTitle>Deploy Contract</FormTitle>
           <FormDescription>
             <Paragraph>Please, set contract details.</Paragraph>
@@ -158,7 +198,7 @@ export class NewContract extends React.Component {
           </InputsContainer>
 
           <NewContractBtn onClick={this.createProject}>Create Contract</NewContractBtn>
-
+        </Inner>
       </ContractLayout>
     )
   }

@@ -24,6 +24,8 @@ const FormTitle = styled.h2`
 const NewContract = styled.a`
 	text-decoration: none;
 	color: black;
+	cursor: pointer;
+
 	&:before {
 		content: url(${plus_circle});
     vertical-align: -25%;

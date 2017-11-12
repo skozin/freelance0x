@@ -10,8 +10,8 @@ const LayoutContainer = styled.div`
   background: url('./assets/background.png') no-repeat center / contain;
   font-face: sans-serif;
   font-size: 16px;
-
-` 
+  height: 100%;
+`
 
 export class Layout extends React.Component {
 

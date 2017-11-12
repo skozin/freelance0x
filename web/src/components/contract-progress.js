@@ -145,7 +145,7 @@ const Bar = styled.div`
 `
 
 const BarEditing = styled.div`
-  margin-left: 48px;
+  margin-left: 32px;
 `
 
 const BarHead = styled.div`

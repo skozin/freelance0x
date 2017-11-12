@@ -12,9 +12,11 @@ import logo from '../../assets/logo.svg'
 const Contract = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 0 40px;
   background: url(${background}) no-repeat center / cover;
   background-attachment: fixed;
+  height: 100%;
   color: #242738;
 `
 
@@ -44,7 +46,7 @@ const Field = styled.div`
 
 export class ContractLayout extends React.Component {
   render() {
-    const {children} = this.props
+    const { children } = this.props
 
     return (
       <Contract>
