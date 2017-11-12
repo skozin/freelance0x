@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom'
 const WelcomeScreenContainer = styled.div`
   margin-top: 10px;
   line-height: 25px;
-  text-align: center;
 `
 
 const NewContractLink = styled(Link)`
@@ -25,6 +24,7 @@ export default function WelcomeScreen() {
       <ParticipateLink to='/participate'>Participate in a contract</ParticipateLink>
       <ParticipateLink to='/contract'>Contract</ParticipateLink>
       <ParticipateLink to='/feedback'>Feedback</ParticipateLink>
+      <ParticipateLink to='/contract-list'>Contract List</ParticipateLink>
     </WelcomeScreenContainer>
   )
 }
